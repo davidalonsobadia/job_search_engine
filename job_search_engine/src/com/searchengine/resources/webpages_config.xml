@@ -40,9 +40,10 @@
 		     	
      	<post-tags>
      		<post-container>container</post-container>
-     		<post-jobgroup>feed</post-jobgroup>
      		<post-title>li</post-title>
      		<post-company>h2</post-company>
+     		<post-date>not used</post-date>
+            <post-description>not used</post-description>
             <post-link>a</post-link>
      	</post-tags>
      	

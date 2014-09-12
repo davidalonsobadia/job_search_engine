@@ -32,7 +32,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import java.lang.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -383,33 +382,23 @@ public class getWebPage {
 
 	public ArrayList<jobPost> IndeedJobs() throws Exception{
 		
-        ArrayList<jobPost> jobPosts = new ArrayList<>();
-                
-        Document xml_config = getXMLDocumentFromInternalFile(config_url);
-       
-        Element item = xml_config.getElementById("Indeed");
-        
-        Element api = item.getElementsByTag("api").first();
-        
-        String name = item.select("name").first().text();
- 	    
-        String root_url = api.select("root_url").first().text();
- 	   	String publisher_id = api.select("publisher_id").first().text();
- 	   	String query = api.select("query").first().text();
- 	   	String location = api.select("location").first().text();
- 	   	String country = api.select("country").first().text();
- 	   	String user_agent = api.select("user_agent").first().text();
- 	   	String api_version = api.select("api_version").first().text();
- 		String limit = api.select("limit").first().text();
- 		
+		ArrayList<jobPost> jobPosts = new ArrayList<>();
+		
+		Document xml_config = getXMLDocumentFromInternalFile(config_url);
+		
+		String name = "Indeed";
+		
+		APIObject api = new APIObject(xml_config, name);
+		
+                         		
  		try {
  			
  			String search_adapted = URLEncoder.encode(search.getCompleteSearch().replace(" ", "+"), "UTF-8");
- 			String user_agent_adapted = URLEncoder.encode(user_agent, "UTF-8");
+ 			String user_agent_adapted = URLEncoder.encode(api.user_agent, "UTF-8");
  					
- 			String query_api =  root_url + "&" + publisher_id + "&" + query 
- 					+ search_adapted + "&" + location + "&" + country 
- 					+ "&" + user_agent_adapted + "&" + api_version  + "&" + limit ;
+ 			String query_api =  api.root_url + "&" + api.publisher_id + "&" + api.query 
+ 					+ search_adapted + "&" + api.location + "&" + api.country 
+ 					+ "&" + user_agent_adapted + "&" + api.api_version  + "&" + api.limit ;
  			
 	        System.out.println(query_api);
 
@@ -422,7 +411,7 @@ public class getWebPage {
 
  			// GET RESPONSE AND MANIPULATE IT
  			
- 			Elements tags = item.getElementsByTag("post-tags");
+ 			Elements tags = api.item.getElementsByTag("post-tags");
  			
  			String tag_container = tags.select("post-container").first().text();
  			String tag_title = tags.select("post-title").first().text();
