@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web_pages>
+    <web_page id="BerlinStartupJobs">
+        <name>Berlin Startup Jobs</name>
+        <logo>http://22iiaa2jpzc63c93rf3p9oti14j8.wpengine.netdna-cdn.com/wp-content/uploads/2011/07/berlin-startup-jobs-logo.png</logo>
+        <urls>
+            <url_main>http://berlinstartupjobs.com/</url_main>
+            <url>http://berlinstartupjobs.com/page/2/</url>
+            <url>http://berlinstartupjobs.com/page/3/</url>
+            <url>http://berlinstartupjobs.com/page/4/</url>
+            <url>http://berlinstartupjobs.com/page/5/</url>
+            
+        </urls>
+        <post-tags>
+            <post-container>loop</post-container>
+            <post-title>h2</post-title>
+            <post-date>post-date</post-date>
+            <post-description>post-content</post-description>
+            <post-link>a</post-link>
+        </post-tags>
+    </web_page>
+    
+     <web_page id="Indeed">
+     	<name>Indeed Jobs</name>
+     	<logo>http://www.indeed.com/images/job_search_indeed.png</logo>
+     	<urls>
+     		<url_main>http://www.indeed.com/</url_main>
+     	</urls>
+		<api>
+			<root_url>http://api.indeed.com/ads/apisearch?</root_url>
+			<help_url>https://ads.indeed.com/jobroll/xmlfeed</help_url>
+			<publisher_id>publisher=3569612107709755</publisher_id>
+			<query>q=</query>
+			<location>l=berlin</location>
+			<country>co=de</country>
+			<user_agent>useragent=Mozilla//4.0(Firefox)</user_agent>
+			<limit>limit=30</limit>
+			<api_version>v=2</api_version>		
+		</api>
+		     	
+     	<post-tags>
+     		<post-container>container</post-container>
+     		<post-jobgroup>feed</post-jobgroup>
+     		<post-title>li</post-title>
+     		<post-company>h2</post-company>
+            <post-link>a</post-link>
+     	</post-tags>
+     	
+     </web_page>
+       
+     <web_page id="BerlinJob">
+     	<name>Berlin Job</name>
+     	<logo>http://www.logoeps.net/wp-content/uploads/2013/04/monster-com-logo.jpg</logo>
+
+        <urls>
+            <url_main>http://berlinjob.net/</url_main>
+            <url>http://berlinjob.net/startup-jobs-berlin/index.php</url>
+            <url>http://berlinjob.net/design-jobs-berlin/index.php</url>
+            <url>http://berlinjob.net/marketing-jobs-berlin/index.php</url>
+            <url>http://berlinjob.net/berlin-internet-jobs/index.php</url>           
+        </urls>
+		     	
+     	<post-tags>
+     		<post-container>div.feed</post-container>
+     		<post-title>li</post-title>
+     		<post-company>h2</post-company>
+            <post-date>not user</post-date>
+            <post-description>not used</post-description>
+            <post-link>a</post-link>
+     	</post-tags>
+     </web_page>
+     
+     <web_page id="CareerBuilder">
+     	<name>Career Builder</name>
+     	<logo>http://www.careerrocketeer.com/wp-content/uploads/CareerBuilder.png</logo>
+     	<urls>
+     		<url_main>http://www.careerbuilder.com/</url_main>
+     	</urls>
+		<api>
+			<root_url>http://api.careerbuilder.de/v1/jobsearch?</root_url>
+			<help_url>http://api.careerbuilder.com/Search/jobsearch/jobsearchinfo.aspx</help_url>
+			<publisher_id>DeveloperKey=WDHS7RX6NYTBWJLKG8JG</publisher_id>
+			<query>Keywords=</query>
+			<location>Location=Berlin</location>
+			<country>co=de</country>
+			<user_agent>useragent=Mozilla//4.0(Firefox)</user_agent>
+			<limit>limit=30</limit>
+		</api>
+		     	
+     	<post-tags>
+     		<post-container>results</post-container>
+     		<post-title>jobtitle</post-title>
+     		<post-company>company</post-company>
+            <post-date>postedtime</post-date>
+            <post-description>DescriptionTeaser</post-description>
+            <post-link>JobDetailsURL</post-link>
+     	</post-tags>
+     </web_page>
+    
+</web_pages>

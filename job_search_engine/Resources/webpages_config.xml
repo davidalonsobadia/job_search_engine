@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web_pages>
+    <item>
+        <name>Berlin Startup Jobs</name>
+        <logo>http://22iiaa2jpzc63c93rf3p9oti14j8.wpengine.netdna-cdn.com/wp-content/uploads/2011/07/berlin-startup-jobs-logo.png</logo>
+        <urls>
+            <url-main>http://berlinstartupjobs.com/</url-main>
+            <url>http://berlinstartupjobs.com/page/2/</url>
+            <url>http://berlinstartupjobs.com/page/3/</url>
+            <url>http://berlinstartupjobs.com/page/4/</url>
+            
+        </urls>
+        <post-tags>
+            <post-container>loop</post-container>
+            <title>h2</title>
+            <date>post-date</date>
+            <description>post-content</description>
+            <link>a</link>
+        </post-tags>
+    </item>
+</web_pages>
