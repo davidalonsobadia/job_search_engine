@@ -379,7 +379,8 @@ public class getWebPage {
 	   
 	   return jobPosts;
 	}
-
+	
+	
 	public ArrayList<jobPost> IndeedJobs() throws Exception{
 		
 		ArrayList<jobPost> jobPosts = new ArrayList<>();
@@ -390,8 +391,20 @@ public class getWebPage {
 		
 		APIObject api = new APIObject(xml_config, name);
 		
+		api.getAPIDataRequest();
 		
-                         		
+		api.setAPIRequest(search.getCompleteSearch());
+		
+		api.getAPIResponse();
+		
+		api.getAPIDataResponse();
+		
+		api.setAPIResponse();
+		
+		
+		
+		/**
+
  		try {
  			
  			String search_adapted = URLEncoder.encode(search.getCompleteSearch().replace(" ", "+"), "UTF-8");
@@ -468,7 +481,7 @@ public class getWebPage {
 	    	System.out.println("Exception handling resquest from: " + name);
 	    	System.out.print(e);
 	    }
-
+ 		**/
         
         return jobPosts;
 		
