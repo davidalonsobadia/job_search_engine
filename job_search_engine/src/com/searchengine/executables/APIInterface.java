@@ -1,5 +1,7 @@
 package com.searchengine.executables;
 
+import java.util.ArrayList;
+
 public interface APIInterface {
 
 	void getAPIDataRequest();
@@ -10,6 +12,6 @@ public interface APIInterface {
 	
 	void getAPIDataResponse();
 	
-	void setAPIResponse();
+	ArrayList<jobPost> setAPIResponse();
 	
 }

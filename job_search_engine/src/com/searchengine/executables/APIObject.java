@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -82,9 +83,9 @@ public class APIObject implements APIInterface{
 			e.printStackTrace();
 		}
 				
-		String query_api =  root_url + "&" + publisher_id + "&" +query 
+		query_api =  root_url + "&" + publisher_id + "&" +query 
 				+ search_adapted + "&" + location + "&" + country 
-				+ "&" + user_agent_adapted + "&" + api_version  + "&" + limit ;
+				+ "&useragent=" + user_agent_adapted + "&" + api_version  + "&" + limit ;
 			
         System.out.println("Query launched: " + query_api);
 	}
@@ -95,7 +96,7 @@ public class APIObject implements APIInterface{
 			APIResponse = Jsoup.connect(query_api).userAgent("Mozilla").get();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Error getting API Data from Jsoup");
+			System.out.println("Error getting API Data from Jsoup for API: " + nameAPI);
 			System.out.println("API call: "+ query_api);
 			e.printStackTrace();
 		}
@@ -115,11 +116,15 @@ public class APIObject implements APIInterface{
 		
 	}
 	
-	public void setAPIResponse(){
+	public ArrayList<jobPost> setAPIResponse(){
+		
+		ArrayList<jobPost> jobs = new ArrayList<>();
 		
  		Element loop = APIResponse.getElementsByTag(tag_container).first();
 		
 	    // Get all posts
+ 		System.out.println(loop);
+ 		
         Elements posts = loop.children();
         
         //For each post
@@ -133,11 +138,14 @@ public class APIObject implements APIInterface{
 
 	        // Get date
 	        String datePost = post.getElementsByTag(tag_date).text();
+	        
+	        Date date = null ;
+	        
 	        try {
-				Date date = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss zzz", Locale.ENGLISH).parse(datePost);
+				date = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss zzz", Locale.ENGLISH).parse(datePost);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Ecpetion produced handling Date formats for " + nameAPI);
+				System.out.println("Excpetion produced handling Date formats for " + nameAPI);
 				e.printStackTrace();
 			}
 	        
@@ -146,10 +154,24 @@ public class APIObject implements APIInterface{
 	        
 	        // company
 	        String company = post.getElementsByTag(tag_company).text();
+	                
 	        
-	        System.out.println(company);
+	        //
+	        jobPost job = new jobPost();
+	        job.setTitle(title);
+	        job.setCompany(company);
+	        job.setDate(date);
+	        job.setDescription(description);
+	        job.setLink(link);
+	        job.setSource(nameAPI);
+	        
+	        jobs.add(job);
+	        
+	        
 	        
         }
+        
+        return jobs;
 		
 	}
 	
@@ -170,6 +192,8 @@ public class APIObject implements APIInterface{
         job.setDescription(description);
         job.setLink(link);
         job.setSource(name);
+        
+        jobPosts.add(job);
 	}
 	**/
 

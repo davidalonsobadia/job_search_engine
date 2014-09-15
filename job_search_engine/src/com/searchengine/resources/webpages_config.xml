@@ -33,18 +33,18 @@
 			<query>q=</query>
 			<location>l=berlin</location>
 			<country>co=de</country>
-			<user_agent>useragent=Mozilla//4.0(Firefox)</user_agent>
+			<user_agent>Mozilla//4.0(Firefox)</user_agent>
 			<limit>limit=30</limit>
 			<api_version>v=2</api_version>		
 		</api>
 		     	
      	<post-tags>
-     		<post-container>container</post-container>
-     		<post-title>li</post-title>
-     		<post-company>h2</post-company>
-     		<post-date>not used</post-date>
-            <post-description>not used</post-description>
-            <post-link>a</post-link>
+     		<post-container>results</post-container>
+     		<post-title>jobtitle</post-title>
+     		<post-company>company</post-company>
+            <post-date>date</post-date>
+            <post-description>snippet</post-description>
+            <post-link>url</post-link>
             <post-date-format>EEE, dd MMM yyyy hh:mm:ss zzz</post-date-format>
      	</post-tags>
      	
@@ -86,7 +86,9 @@
 			<location>Location=Berlin</location>
 			<country>co=de</country>
 			<user_agent>useragent=Mozilla//4.0(Firefox)</user_agent>
-			<limit>limit=30</limit>
+			<limit>not used</limit>
+			<api_version>not used</api_version>		
+			
 		</api>
 		     	
      	<post-tags>
@@ -96,7 +98,7 @@
             <post-date>postedtime</post-date>
             <post-description>DescriptionTeaser</post-description>
             <post-link>JobDetailsURL</post-link>
-            <post-date-format>dd/MM/yyyy hh:mm:ss aa</post-date-format>
+            <post-date-format>MM/dd/yyyy hh:mm:ss aa</post-date-format>
      	</post-tags>
      </web_page>
     
