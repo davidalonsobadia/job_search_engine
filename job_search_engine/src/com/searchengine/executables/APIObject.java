@@ -41,7 +41,8 @@ public class APIObject implements APIInterface{
 	private String tag_description;
 	private String tag_date;
 	private String tag_link;
-	private String tag_company; 
+	private String tag_company;
+	private String tag_post_format;
 		
 	
 	// Data retrieved from API
@@ -112,7 +113,7 @@ public class APIObject implements APIInterface{
 		this.tag_date = tags.select("post-date").first().text();
 		this.tag_link = tags.select("post-link").first().text();
 		this.tag_company = tags.select("post-company").first().text(); 
-			
+		this.tag_post_format = tags.select("post-date-format").first().text();	
 		
 	}
 	
@@ -122,9 +123,7 @@ public class APIObject implements APIInterface{
 		
  		Element loop = APIResponse.getElementsByTag(tag_container).first();
 		
-	    // Get all posts
- 		System.out.println(loop);
- 		
+	    // Get all posts		
         Elements posts = loop.children();
         
         //For each post
@@ -142,10 +141,10 @@ public class APIObject implements APIInterface{
 	        Date date = null ;
 	        
 	        try {
-				date = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss zzz", Locale.ENGLISH).parse(datePost);
+				date = new SimpleDateFormat(tag_post_format, Locale.ENGLISH).parse(datePost);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Excpetion produced handling Date formats for " + nameAPI);
+				System.out.println("Exception produced handling Date formats for " + nameAPI);
 				e.printStackTrace();
 			}
 	        

@@ -1,15 +1,21 @@
 @CHARSET "UTF-8";
 * {margin: 0; padding: 0;}
 
+.mainPage {
+	background-image: url("office_background_blur.jpg");
+	background-repeat: no-repeat;
+	background-color: red;
+}
+
 .content-title{
-color: #000;
-font-size: 18px;
-padding: 0 0 15px 6px;
-border-bottom: 1px solid #d9d9d9;
-text-transform: uppercase;
-position: relative;
-font-family: 'Open Sans', sans-serif;
-font-weight: 600;
+	color: #000;
+	font-size: 18px;
+	padding: 0 0 15px 6px;
+	border-bottom: 1px solid #d9d9d9;
+	text-transform: uppercase;
+	position: relative;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
 }
 
 div {
