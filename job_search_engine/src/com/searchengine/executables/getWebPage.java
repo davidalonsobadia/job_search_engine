@@ -390,6 +390,7 @@ public class getWebPage {
 		
 		APIObject api = new APIObject(xml_config, name);
 		
+		
                          		
  		try {
  			
@@ -517,9 +518,7 @@ public class getWebPage {
  			
 			 			
  			Element loop = doc.getElementsByTag(tag_container).first();
- 			
- 			System.out.println(query_api);
-		        
+ 					        
 		    // Get all posts
 	        Elements posts = loop.children();
 	        

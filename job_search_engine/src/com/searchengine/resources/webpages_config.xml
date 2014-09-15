@@ -45,6 +45,7 @@
      		<post-date>not used</post-date>
             <post-description>not used</post-description>
             <post-link>a</post-link>
+            <post-date-format>EEE, dd MMM yyyy hh:mm:ss zzz</post-date-format>
      	</post-tags>
      	
      </web_page>
@@ -95,6 +96,7 @@
             <post-date>postedtime</post-date>
             <post-description>DescriptionTeaser</post-description>
             <post-link>JobDetailsURL</post-link>
+            <post-date-format>dd/MM/yyyy hh:mm:ss aa</post-date-format>
      	</post-tags>
      </web_page>
     
