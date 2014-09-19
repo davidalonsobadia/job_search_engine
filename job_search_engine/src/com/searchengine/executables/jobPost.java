@@ -36,7 +36,7 @@ public class jobPost {
 		this.date = date;
 	}
 	
-	public void setSource(String Source){
+	public void setSource(String source){
 		this.source = source;
 	}
 	

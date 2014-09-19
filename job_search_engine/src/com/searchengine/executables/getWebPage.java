@@ -257,7 +257,7 @@ public class getWebPage {
 				        job.setDescription(description);
 				        job.setLink(linkTitle);
 				        job.setSource(name);
-				        
+				        				        
 				        jobPosts.add(job);
 			        	
 			        }
