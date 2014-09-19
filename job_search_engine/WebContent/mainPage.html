@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="stylesheet" type="text/css" href="main_page.css" />
-<title>Main Page</title>
-</head>
+	<head>
+		<link rel="stylesheet" href="style.css" />
+		<title>Berlin Jobs</title>
+	</head>
 
-<body>
-<div class="mainPage">
- 
-<form action="InitSearch" method="post">
- 
-Job Search: <input type="text" name="Search">
-<input type="submit" value="Search">
-</form>
+	<body>
+		<div class="container">
+			<div class="up-center-page">
+				<div class="central-statement">
+					<div id="central-message">
+						<div id="title">
+							English Jobs in Berlin
+						</div>
+						<div id="subtitle">
+							Find the job of your dreams in the most exciting European capital
+						</div>
+					</div>
+					<form id="central-form" action="InitSearch" method="post">
+				 		<div class="wrapper-form">
+					 		<input id="search-form" type="text" name="Search" placeholder="Start your search now!"></input>
+							<input id="search-button" type="submit" value="Search"></input>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="down-page">
+			</div>
+		</div>
 
-</div>
-</body>
+	</body>
 </html>
