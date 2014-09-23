@@ -46,7 +46,7 @@ import javax.xml.xpath.XPathFactory;
 
 public class getWebPage {
 	
-	private static StringSearch search;
+	private StringSearch search;
 	private String config_url = "com/searchengine/resources/webpages_config.xml";
 	
 	public getWebPage(StringSearch search){
@@ -54,6 +54,7 @@ public class getWebPage {
 	}
 	
 
+	/**
 	public static org.w3c.dom.Document CreateBuilderFactory() throws Exception{
 		
 
@@ -66,33 +67,23 @@ public class getWebPage {
 		
 		XMLDocument = Utils.newDocumentFromInputStream(webpage_config);
 		
-		//String s = Utils.getStringFromInputStream(webpage_config);
-		//XMLDocument = Utils.getw3cDocumentfronString(s);
-		
-		//System.out.println(xmlDocument);
-
 		return XMLDocument;
 	}
+	**/
 	
+	/**
 	public static String getStringFromXMLConfig() throws Exception{
 		
-
-		//String XMLDocument = null;
-
 		InputStream webpage_config = getWebPage.class
 		           .getClassLoader()
 		           .getResourceAsStream("com/searchengine/resources/webpages_config.xml");
-		
-		
-		//XMLDocument = Utils.newDocumentFromInputStream(webpage_config);
+
 		
 		String s = Utils.getStringFromInputStream(webpage_config);
-		//XMLDocument = Utils.getw3cDocumentfronString(s);
-		
-		//System.out.println(xmlDocument);
 
 		return s;
 	}
+	**/
 	
 	public static Document getXMLDocumentFromInternalFile(String internalUrl) throws IOException, URISyntaxException{
 		
@@ -116,13 +107,11 @@ public class getWebPage {
 	}
 
 
-	public static boolean checkMatch(String[] texts){
+	public boolean checkMatch(String[] texts){
 		
 		String pattern_search = "^";
 		String all_texts = "";
 
-		//^(?=.*?(single_search))(?=.*?(single_search)).*$
-		
 		for ( String single_search : search.getArrayWords())	
 			pattern_search = pattern_search 
 				 + "(?=.*?(\\b" + single_search + "\\b))";
@@ -145,32 +134,19 @@ public class getWebPage {
         }
 		return false;
 	}
-	
+
 	public ArrayList<jobPost> BerlinStartupJobs() throws Exception{
 		
 		
         // CLass joBposts where we will store each post for the page
         ArrayList<jobPost> jobPosts = new ArrayList<>();
         
-        /**
-        org.w3c.dom.Document XML_config = CreateBuilderFactory();
-
-        XPath xPath =  XPathFactory.newInstance().newXPath();
-        
-        String expr_getItem = "/web_pages/web_page[name='Berlin Startup Jobs']/post-tags";
-        org.w3c.dom.Node node = (org.w3c.dom.Node) xPath.compile(expr_getItem).evaluate(XML_config, XPathConstants.NODE);
-        **/
-        
-        /**
-        String xml_config = getStringFromXMLConfig();
-        Document xml_doc = Jsoup.parse(xml_config, "", Parser.xmlParser());
-        **/
         
         // GET THE DATA FROM THE XML FILE
         
         //String internalUrl = "com/searchengine/resources/webpages_config.xml";
         
-        Document xml_config = getXMLDocumentFromInternalFile(config_url);
+       Document xml_config = getXMLDocumentFromInternalFile(config_url);
        
         
 		/**All this is for Berlin Start-up Job. 
@@ -202,9 +178,7 @@ public class getWebPage {
 		   
 			   
 			   //GET RESPONSE 
-			   
 		       Document doc = Jsoup.connect(web_url.text()).userAgent("Mozilla").get();
-		        
 		       
 		       // MANIPULATE RESPONE -- Parse the document		       
 
@@ -282,6 +256,8 @@ public class getWebPage {
 	   return jobPosts;
 	}
 
+
+	/**
 	public ArrayList<jobPost> BerlinJob() throws Exception{
 		
 		
@@ -379,7 +355,25 @@ public class getWebPage {
 	   
 	   return jobPosts;
 	}
+	**/
 	
+	public ArrayList<jobPost> BerlinJob() throws Exception{
+		
+		ArrayList<jobPost> jobPosts = new ArrayList<>();
+		
+		Document xml_config = getXMLDocumentFromInternalFile(config_url);
+		
+		String name = "BerlinJob";
+		
+		webCrawlerObject webObject = new webCrawlerObject(xml_config, name, search.getArrayWords());
+		
+		webObject.getwebCrawlerDataRequest();
+			
+		jobPosts = webObject.setwebCrawlerRequest();
+			
+		return jobPosts;
+		
+	}
 	
 	public ArrayList<jobPost> IndeedJobs() throws Exception{
 		

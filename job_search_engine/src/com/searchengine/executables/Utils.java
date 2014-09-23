@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -53,6 +55,7 @@ import org.xml.sax.SAXException;
  *          manipulation
  */
 public class Utils {
+	
   public static Document newDocumentFromInputStream(InputStream in) {
 
     DocumentBuilderFactory factory = null;
@@ -120,4 +123,31 @@ public class Utils {
 	  return doc;
   }
 
+	public static boolean checkMatch(String[] texts, StringSearch search){
+		
+		String pattern_search = "^";
+		String all_texts = "";
+
+		for ( String single_search : search.getArrayWords())	
+			pattern_search = pattern_search 
+				 + "(?=.*?(\\b" + single_search + "\\b))";
+		
+		pattern_search += ".*$";
+			
+		for ( String text : texts)
+			all_texts = all_texts + " " + text;
+		
+        Pattern pattern = Pattern.compile(pattern_search, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(all_texts);
+        
+        //Test the search
+        
+        if (matcher.find()){
+        	System.out.println("Match");
+        	System.out.println(matcher.group(1));
+        	System.out.println(matcher.group(0));
+            return true;
+        }
+		return false;
+	}
 }

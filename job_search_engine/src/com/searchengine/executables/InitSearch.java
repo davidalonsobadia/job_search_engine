@@ -53,8 +53,8 @@ public class InitSearch extends HttpServlet {
 		
 		try {
 			//jobs = web_pages.BerlinStartupJobs();
-			jobs = web_pages.IndeedJobs();
-			//jobs = web_pages.BerlinJob();
+			//jobs = web_pages.IndeedJobs();
+			jobs = web_pages.BerlinJob();
 			//jobs = web_pages.CareerBuilderJobs();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
