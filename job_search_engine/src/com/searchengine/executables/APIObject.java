@@ -50,6 +50,9 @@ public class APIObject extends JobSource{
 	
 	
 	public APIObject (Document xml, String name){
+		
+		System.out.println("Using next Source: " + name );
+		
 		xml_item = xml.getElementById(name);
 	}
 	
@@ -79,7 +82,7 @@ public class APIObject extends JobSource{
 			search_adapted = URLEncoder.encode(search.replace(" ", "+"), "UTF-8");	
 			user_agent_adapted = URLEncoder.encode(user_agent, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			System.out.println("Error encoding and handling the String search: "+ search);
+			System.out.println("ERROR: encoding and handling the String search: "+ search);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -88,7 +91,7 @@ public class APIObject extends JobSource{
 				+ search_adapted + "&" + location + "&" + country 
 				+ "&useragent=" + user_agent_adapted + "&" + api_version  + "&" + limit ;
 			
-        System.out.println("Query launched: " + query_api);
+        System.out.println("Next Query launched: " + query_api);
 	}
 	
 	public void getAPIResponse(){
@@ -97,7 +100,7 @@ public class APIObject extends JobSource{
 			APIResponse = Jsoup.connect(query_api).userAgent("Mozilla").get();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Error getting API Data from Jsoup for API: " + nameAPI);
+			System.out.println("ERROR getting API Data from Jsoup for API: " + nameAPI);
 			System.out.println("API call: "+ query_api);
 			e.printStackTrace();
 		}

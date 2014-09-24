@@ -37,6 +37,9 @@ public class webCrawlerObject extends JobSource{
 	private String tag_date_format;
 		
 	public webCrawlerObject (Document xml, String name, String searchWords[]){
+		
+		System.out.println("Using next Source: " + name );
+		
 		this.xml_item = xml.getElementById(name);
 		this.jobPosts = new ArrayList<jobPost>();
 		this.searchWords = searchWords;
@@ -72,7 +75,7 @@ public class webCrawlerObject extends JobSource{
 			doc = Jsoup.connect(web_url.text()).userAgent("Mozilla").get();
 
 		} catch (Exception e) {
-			   System.out.println("A problem occur trying to crawl the web");
+			   System.out.println("ERROR: A problem occur trying to crawl the web " + web_url.text() );
 			   System.out.println(e);	
 		}
 		return doc;
@@ -96,9 +99,16 @@ public class webCrawlerObject extends JobSource{
 			       }
 			   }
 		   } catch (Exception e) {
-			   System.out.println("A problem occur trying to get the data from the web");
+			   System.out.println("ERROR: A problem occur trying to get the data from the web");
 			   System.out.println(e);			   
 		   }
+		   
+
+	    System.out.println("Job posts founded in " 
+		   + this.nameWebCrawler 
+		   + ": "
+		   + jobs.size() );
+	    
 		return jobs;
 	}
 		
@@ -114,8 +124,6 @@ public class webCrawlerObject extends JobSource{
         
         // Get all posts
         Elements posts = loop.children();
-        
-        
 
         try{ 
         	//For each post
@@ -168,12 +176,10 @@ public class webCrawlerObject extends JobSource{
 
 		   }
 		                
-	    } catch (Exception e) {}
-
-	    System.out.println("Job posts founded in " 
-		   + this.nameWebCrawler 
-		   + ": "
-		   + jobPosts.size() );
+	    } catch (Exception e) {
+	    	System.out.println("ERROR: Some unexpected occur trying to collecting the data.");
+	    	System.out.println(e);
+	    }
 
 	   	return jobPosts;
 	}
@@ -187,15 +193,9 @@ public class webCrawlerObject extends JobSource{
 	        
 		        //For each group of jobs (sorted normally by company)
 		        for (Element group_jobs : loop) {
-		        	
-		        	//System.out.println(group_jobs);
-		        	//System.out.println(tag_company);
-		        	
+		        		        	
 			        String company = group_jobs.getElementsByTag(tag_company).first().text().trim();
-			        
-			        //System.out.println("Company");
-			        //System.out.println(company);
-			        
+
 			        // Empty company means no jobs there
 			        if ( company.length() < 1){
 			        	continue;
@@ -204,17 +204,15 @@ public class webCrawlerObject extends JobSource{
 			        Elements list_jobs = group_jobs.getElementsByTag(tag_title);		        
 			        
 			        for (Element link_job : list_jobs){
+			        	
 			        	String linkTitle = link_job.getElementsByTag(tag_link).first().attr("href").trim();
 			        	String title = link_job.text();
-			        	
-			        	//System.out.println(title);
 			        	
 				        String[] texts = {title};
 				        if (checkMatch(texts, searchWords)) {
 					        
 					        // There is neither date nor description for these jobs posts
 				        	// ADD RESULTS
-				        	
 					        jobPost job = new jobPost();
 					        job.setTitle(title);
 					        job.setCompany(company);

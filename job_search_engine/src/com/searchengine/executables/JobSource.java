@@ -2,9 +2,6 @@ package com.searchengine.executables;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.searchengine.executables.StringSearch;
-
-
 public abstract class JobSource {
 	
 	public boolean checkMatch(String[] texts, String[] searchWords){
@@ -27,9 +24,7 @@ public abstract class JobSource {
         //Test the search
         
         if (matcher.find()){
-        	System.out.println("Match");
-        	System.out.println(matcher.group(1));
-        	System.out.println(matcher.group(0));
+        	System.out.println("Match: "+ matcher.group(1) + " ----> " + matcher.group(0));
             return true;
         }
 		return false;
