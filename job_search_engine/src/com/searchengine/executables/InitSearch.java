@@ -49,13 +49,13 @@ public class InitSearch extends HttpServlet {
 		
 		getWebPage web_pages = new getWebPage(sSearch);
 		
-		ArrayList<jobPost> jobs = null;
+		ArrayList<jobPost> jobs = new ArrayList<>();
 		
 		try {
-			//jobs = web_pages.BerlinStartupJobs();
-			//jobs = web_pages.IndeedJobs();
-			jobs = web_pages.BerlinJob();
-			//jobs = web_pages.CareerBuilderJobs();
+			jobs.addAll(web_pages.BerlinStartupJobs());
+			jobs.addAll(web_pages.IndeedJobs());
+			jobs.addAll(web_pages.BerlinJob());
+			jobs.addAll(web_pages.CareerBuilderJobs());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

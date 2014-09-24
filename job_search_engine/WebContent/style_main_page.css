@@ -1,0 +1,182 @@
+html,body{
+	background-color: #23304A;
+	margin: 0%;
+	padding: 0%;
+	width: 100%;
+	height:100%;
+}
+
+.container{
+	background-color: #23304A;
+	position: absolute;
+	top: 0%;
+	margin: 0%;
+	padding: 0%;
+	width: 100%;
+	height: 100%;
+}
+
+.up-center-page{
+	background-image: url("office_background_blur.jpg");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+	position: relative;
+	top: 0%;
+	margin: 0%;
+	padding: 0%;
+	width: 100%;
+	height: 80%;
+}
+
+.down-page{
+	background-color: #23304A;
+	width: 100%;
+	height: 20%;
+	margin: 0%;
+	padding: 0%;
+
+}
+
+#central-message{
+	font-size: 30px;
+	font-weight: 900;
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #FFF;
+	text-align: center;
+}
+
+#title{
+	text-transform: uppercase;
+}
+
+#subtitle{
+	font-size: 18px;
+	padding: 0.5%;
+}
+
+.central-statement{
+	padding-top: 15%;
+}
+
+#central-form{
+	box-sizing: border-box;
+	color: #565A5C;
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	line-height: 20.0167px;
+	text-align: center;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#search-form{
+	background-color: #FFF;
+	border-bottom-color: #AAA;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 0px;
+	border-bottom-style: solid;
+	border-bottom-width: 0px;
+	border-image-outset: 0 0 0 0;
+	border-image-repeat: stretch stretch;
+	border-image-slice: 100% 100% 100% 100%;
+	border-image-source: none;
+	border-image-width: 1 1 1 1;
+	border-left-color: #AAA;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: #AAA;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-color: #AAA;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 0px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	box-sizing: border-box;
+	color: #565A5C;
+	display: inline;
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 16px;
+	height: 44px;
+	line-height: 21.0167px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	text-align: start;
+	transition-delay: 0s;
+	transition-duration: 0.2s;
+	transition-property: border-color;
+	transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+	width: 400px;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
+
+#search-button{
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: #FF5A5F;
+	background-image: none;
+	background-origin: padding-box;
+	background-position: 0% 0%;
+	background-repeat: repeat;
+	background-size: auto auto;
+	border-bottom-color: #E00007;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 2px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-image-outset: 0 0 0 0;
+	border-image-repeat: stretch stretch;
+	border-image-slice: 100% 100% 100% 100%;
+	border-image-source: none;
+	border-image-width: 1 1 1 1;
+	border-left-color: #FF5A5F;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: #FF5A5F;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-color: #FF5A5F;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 2px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	box-sizing: border-box;
+	color: #FFF;
+	cursor: pointer;
+	display: inline;
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 16px;
+	font-weight: 700;
+	height: 44px;
+	line-height: 22.8833px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	padding-bottom: 9px;
+	padding-left: 27px;
+	padding-right: 27px;
+	padding-top: 9px;
+	text-align: center;
+	text-transform: none;
+	vertical-align: baseline;
+	white-space: nowrap;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	-moz-osx-font-smoothing: grayscale;
+	-moz-user-select: none;
+}
+

@@ -17,6 +17,7 @@
             <post-date>post-date</post-date>
             <post-description>post-content</post-description>
             <post-link>a</post-link>
+            <post-company>not used</post-company>
         </post-tags>
     </web_page>
     

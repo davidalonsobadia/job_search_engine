@@ -14,7 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class APIObject implements APIInterface{
+public class APIObject extends JobSource{
 
 	private String nameAPI;
 	
@@ -164,130 +164,11 @@ public class APIObject implements APIInterface{
 	        job.setLink(link);
 	        job.setSource(nameAPI);
 	        
-	        jobs.add(job);
-	        
-	        
-	        
+	        jobs.add(job);	        
         }
         
         return jobs;
 		
 	}
 	
-	/**
-	public JobPost getResponse(){
-		
-		
-	}
-	**/
-	
-	/**
-	public void copyAnswer(){
-		
-        jobPost job = new jobPost();
-        job.setTitle(title);
-        job.setCompany(company);
-        job.setDate(date);
-        job.setDescription(description);
-        job.setLink(link);
-        job.setSource(name);
-        
-        jobPosts.add(job);
-	}
-	**/
-
-	/**
-	public APIObject(Document xml, String name){
-		
-		item = xml.getElementById(name);
-        
-        Element api = item.getElementsByTag("api").first();
-        
-        this.nameAPI = item.select("name").first().text();
- 	    
-        this.root_url = api.select("root_url").first().text();
- 	   	this.publisher_id = api.select("publisher_id").first().text();
- 	   	this.query = api.select("query").first().text();
- 	   	this.location = api.select("location").first().text();
- 	   	this.country = api.select("country").first().text();
- 	   	this.user_agent = api.select("user_agent").first().text();
- 	   	this.api_version = api.select("api_version").first().text();
- 		this.limit = api.select("limit").first().text();
- 		
- 		
- 		
- 		
- 		try {
- 			
- 			String search_adapted = URLEncoder.encode(search.getCompleteSearch().replace(" ", "+"), "UTF-8");
- 			String user_agent_adapted = URLEncoder.encode(user_agent, "UTF-8");
- 					
- 			String query_api =  root_url + "&" + publisher_id + "&" +query 
- 					+ search_adapted + "&" + location + "&" + country 
- 					+ "&" + user_agent_adapted + "&" + api_version  + "&" + limit ;
- 			
-	        System.out.println(query_api);
-
- 			
- 			// MAKE THE QUERY
- 			
- 			Document doc = Jsoup.connect(query_api).userAgent("Mozilla").get();
- 			
- 			// GET RESPONSE AND MANIPULATE IT
- 			
- 			Elements tags = item.getElementsByTag("post-tags");
- 			
- 			this.tag_container = tags.select("post-container").first().text();
- 			this.tag_title = tags.select("post-title").first().text();
- 			this.tag_description = tags.select("post-description").first().text();
- 			this.tag_date = tags.select("post-date").first().text();
- 			this.tag_link = tags.select("post-link").first().text();
- 			this.tag_company = tags.select("post-company").first().text(); 
- 			
-	 		Element loop = doc.getElementsByTag(tag_container).first();
-	        
-		    // Get all posts
-	        Elements posts = loop.children();
-	        
-	        //For each post
-	        for (Element post : posts) {
-		        
-		        // Get title 
-	        	String title = post.getElementsByTag(tag_title).text();
-		               
-		        //description
-		        String description = post.getElementsByTag(tag_description).text();
-	
-		        // Get date
-		        String datePost = post.getElementsByTag(tag_date).text();
-		        Date date = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss zzz", Locale.ENGLISH).parse(datePost);
-		        
-		        //link
-		        String link = post.getElementsByTag(tag_link).text();
-		        
-		        // company
-		        String company = post.getElementsByTag(tag_company).text();
-		        
-		        System.out.println(link);
-		        
-		        jobPost job = new jobPost();
-		        job.setTitle(title);
-		        job.setCompany(company);
-		        job.setDate(date);
-		        job.setDescription(description);
-		        job.setLink(link);
-		        job.setSource(name);
-		        
-		        //jobPost.add(job);
-			        
-	        }
-	        
- 			
-	    } catch (Exception e) {
-	    	System.out.println("Exception handling resquest from: " + name);
-	    	System.out.print(e);
-	    }
- 		
-	}
-	**/
 }
