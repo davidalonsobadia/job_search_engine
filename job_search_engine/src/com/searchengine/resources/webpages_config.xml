@@ -17,11 +17,12 @@
             <post-date>post-date</post-date>
             <post-description>post-content</post-description>
             <post-link>a</post-link>
-            <post-company>not used</post-company>
+            <post-company>not_used</post-company>
+            <post-date-format>MMM d, yyyy</post-date-format>
         </post-tags>
     </web_page>
     
-     <web_page id="Indeed">
+     <api id="Indeed">
      	<name>Indeed Jobs</name>
      	<logo>http://www.indeed.com/images/job_search_indeed.png</logo>
      	<urls>
@@ -49,7 +50,7 @@
             <post-date-format>EEE, dd MMM yyyy hh:mm:ss zzz</post-date-format>
      	</post-tags>
      	
-     </web_page>
+     </api>
        
      <web_page id="BerlinJob">
      	<name>Berlin Job</name>
@@ -68,12 +69,13 @@
      		<post-title>li</post-title>
      		<post-company>h2</post-company>
             <post-date>not user</post-date>
-            <post-description>not used</post-description>
+            <post-description>not_used</post-description>
             <post-link>a</post-link>
+            <post-date-format>not_used</post-date-format>
      	</post-tags>
      </web_page>
      
-     <web_page id="CareerBuilder">
+     <api id="CareerBuilder">
      	<name>Career Builder</name>
      	<logo>http://www.careerrocketeer.com/wp-content/uploads/CareerBuilder.png</logo>
      	<urls>
@@ -101,6 +103,6 @@
             <post-link>JobDetailsURL</post-link>
             <post-date-format>MM/dd/yyyy hh:mm:ss aa</post-date-format>
      	</post-tags>
-     </web_page>
+     </api>
     
 </web_pages>

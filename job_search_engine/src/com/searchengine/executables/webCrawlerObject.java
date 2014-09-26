@@ -4,13 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class webCrawlerObject extends JobSource{
+public class webCrawlerObject extends JobSource implements Callable{
 
 	private String nameWebCrawler;
 	
@@ -37,12 +38,17 @@ public class webCrawlerObject extends JobSource{
 	private String tag_date_format;
 		
 	public webCrawlerObject (Document xml, String name, String searchWords[]){
-		
-		System.out.println("Using next Source: " + name );
-		
+			
 		this.xml_item = xml.getElementById(name);
 		this.jobPosts = new ArrayList<jobPost>();
 		this.searchWords = searchWords;
+	}
+	
+	@Override
+	public ArrayList<jobPost> call() throws Exception {
+		
+		getwebCrawlerDataRequest();
+		return setwebCrawlerRequest();
 	}
 
 	public void getwebCrawlerDataRequest() {
@@ -64,6 +70,7 @@ public class webCrawlerObject extends JobSource{
 		this.tag_date = tags.select("post-date").first().text();
 		this.tag_link = tags.select("post-link").first().text();
 		this.tag_company = tags.select("post-company").first().text();
+		this.tag_date_format= tags.select("post-date-format").first().text();
 	}
 
 	public Document getwebCrawlerResponse(Element web_url) {
@@ -82,20 +89,22 @@ public class webCrawlerObject extends JobSource{
 	}
 
 	public ArrayList<jobPost> setwebCrawlerRequest() {
-	
-		ArrayList<jobPost> jobs = new ArrayList<jobPost>();
+		
 		   try {
 			   
 			   for (Element web_url : web_urls ) {	   
 				   
 				   //GET RESPONSE 
 			       Document doc = getwebCrawlerResponse(web_url);
-			       			       
-			       if (nameWebCrawler.equalsIgnoreCase("Berlin Job")){
-			    	   	jobs.addAll(getwebCrawlerDataResponseBerlinJob(doc));
-			    
-			       } else if ( nameWebCrawler.equalsIgnoreCase("Berlin Startup Jobs")){ 
-			    	   jobs.addAll(getwebCrawlerDataResponseBerlinStartUpJob(doc));
+			       
+			       if( doc != null){
+				       			       
+				       if (nameWebCrawler.equalsIgnoreCase("Berlin Job")){
+				    	   	jobPosts.addAll(getwebCrawlerDataResponseBerlinJob(doc));
+				    
+				       } else if ( nameWebCrawler.equalsIgnoreCase("Berlin Startup Jobs")){ 
+				    	   jobPosts.addAll(getwebCrawlerDataResponseBerlinStartUpJob(doc));
+				       }
 			       }
 			   }
 		   } catch (Exception e) {
@@ -104,24 +113,22 @@ public class webCrawlerObject extends JobSource{
 		   }
 		   
 
-	    System.out.println("Job posts founded in " 
+	    System.out.println("Job posts found in " 
 		   + this.nameWebCrawler 
 		   + ": "
-		   + jobs.size() );
+		   + jobPosts.size() );
 	    
-		return jobs;
+		return jobPosts;
 	}
 		
 	public ArrayList<jobPost> getwebCrawlerDataResponseBerlinStartUpJob(Document doc) {
 		
-		// MANIPULATE RESPONE -- Parse the document		       
+		// MANIPULATE RESPONE -- Parse the document	
+		ArrayList<jobPost> jobsInWebPage = new ArrayList<jobPost>();
 			
         // Get the main element for job-posts
-        
         Element loop = doc.getElementById(tag_container);
-        
-        System.out.println(loop);
-        
+               
         // Get all posts
         Elements posts = loop.children();
 
@@ -151,7 +158,7 @@ public class webCrawlerObject extends JobSource{
 		        
 		        // Get date
 		        String datePost = post.getElementsByClass(tag_date).text();
-		        Date date = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH).parse(datePost);
+		        Date date = new SimpleDateFormat(tag_date_format, Locale.ENGLISH).parse(datePost);
 		        
 		        // Check if the post contains all search words in both 
 		        // description and title 
@@ -160,7 +167,7 @@ public class webCrawlerObject extends JobSource{
 		        
 		        if (checkMatch(texts, searchWords)) {
 			        
-		        	// ADD RESULTS
+		        	// ADD RESULTS	        	
 		        	
 			        jobPost job = new jobPost();
 			        job.setTitle(title);
@@ -170,22 +177,23 @@ public class webCrawlerObject extends JobSource{
 			        job.setLink(linkTitle);
 			        job.setSource(this.nameWebCrawler);
 			        				        
-			        jobPosts.add(job);
+			        jobsInWebPage.add(job);
 		        	
 		        }          
-
 		   }
 		                
 	    } catch (Exception e) {
 	    	System.out.println("ERROR: Some unexpected occur trying to collecting the data.");
 	    	System.out.println(e);
 	    }
-
-	   	return jobPosts;
+        
+	   	return jobsInWebPage;
 	}
 
 		
 	public ArrayList<jobPost> getwebCrawlerDataResponseBerlinJob(Document doc) {
+		
+		ArrayList<jobPost> jobsInWebPage = new ArrayList<jobPost>();
 		
         try {
  		   
@@ -221,7 +229,7 @@ public class webCrawlerObject extends JobSource{
 					        job.setLink(linkTitle);
 					        job.setSource(nameWebCrawler);
 					        
-					        jobPosts.add(job);
+					        jobsInWebPage.add(job);
 				        	
 				        }
 			        	
@@ -229,14 +237,12 @@ public class webCrawlerObject extends JobSource{
 			        		        
 		        }
 		                
-	    } catch (Exception e) {}
-	
-	   System.out.println("Job posts founded in " 
-			   + xml_item.getElementsByTag("name").first().text() 
-			   + ": "
-			   + jobPosts.size() );
+	    } catch (Exception e) {
+	    	System.out.println("ERROR: Some unexpected occur trying to collecting the data.");
+	    	System.out.println(e);
+	    }
 	   
-	   return jobPosts;
+	   return jobsInWebPage;
 	}
 
 }

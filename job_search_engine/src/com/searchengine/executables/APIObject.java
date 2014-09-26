@@ -8,13 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class APIObject extends JobSource{
+public class APIObject extends JobSource implements Callable{
 
 	private String nameAPI;
 	
@@ -48,15 +49,30 @@ public class APIObject extends JobSource{
 	// Data retrieved from API
 	private Document APIResponse; 
 	
+	private String completeSearch;
 	
-	public APIObject (Document xml, String name){
-		
-		System.out.println("Using next Source: " + name );
-		
+	public APIObject (Document xml, String name, String CompleteSearch){
+				
 		xml_item = xml.getElementById(name);
+		this.completeSearch = CompleteSearch;
 	}
 	
-	public void getAPIDataRequest(){		
+	@Override
+	public Object call() throws Exception {
+		// TODO Auto-generated method stub
+		setAPIDataRequest();
+		
+		setAPIRequest();
+		
+		getAPIResponse();
+	
+		getAPIDataResponse();
+			
+		return setAPIResponse();
+		
+	}
+	
+	public void setAPIDataRequest(){		
 		        
         Element api = xml_item.getElementsByTag("api").first();
         
@@ -73,16 +89,16 @@ public class APIObject extends JobSource{
 		
 	}
 	
-	public void setAPIRequest(String search){
+	public void setAPIRequest(){
 		
 		String search_adapted = "";
 		String user_agent_adapted = "";
 		
 		try {
-			search_adapted = URLEncoder.encode(search.replace(" ", "+"), "UTF-8");	
+			search_adapted = URLEncoder.encode(completeSearch.replace(" ", "+"), "UTF-8");	
 			user_agent_adapted = URLEncoder.encode(user_agent, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			System.out.println("ERROR: encoding and handling the String search: "+ search);
+			System.out.println("ERROR: encoding and handling the String search: "+ completeSearch);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -91,7 +107,7 @@ public class APIObject extends JobSource{
 				+ search_adapted + "&" + location + "&" + country 
 				+ "&useragent=" + user_agent_adapted + "&" + api_version  + "&" + limit ;
 			
-        System.out.println("Next Query launched: " + query_api);
+        System.out.println("Next API-Request launched: " + query_api);
 	}
 	
 	public void getAPIResponse(){
@@ -170,8 +186,14 @@ public class APIObject extends JobSource{
 	        jobs.add(job);	        
         }
         
+	    System.out.println("Job posts found in " 
+		   + this.nameAPI 
+		   + ": "
+		   + jobs.size() );
+        
         return jobs;
 		
 	}
+
 	
 }

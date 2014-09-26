@@ -2,7 +2,11 @@ package com.searchengine.executables;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class JobSource {
+public abstract class JobSource{
+	
+	private String JobSourceName;
+	
+	
 	
 	public boolean checkMatch(String[] texts, String[] searchWords){
 		

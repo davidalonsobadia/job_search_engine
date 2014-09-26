@@ -1,7 +1,6 @@
 package com.searchengine.executables;
 
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
@@ -23,8 +22,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,23 +49,85 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
-public class getWebPage {
+public class BuilderSearcher {
 	
 	private StringSearch search;
+	private Document xml_config;
 	private String config_url = "com/searchengine/resources/webpages_config.xml";
 	
-	public getWebPage(StringSearch search){
+	private ArrayList<jobPost> jobPosts;
+	
+	private String searchNames[] = 
+		{"BerlinStartupJobs",
+			 "BerlinJob",
+			 "Indeed",
+			 "CareerBuilder"};
+	
+	public BuilderSearcher(StringSearch search){
 		this.search = search;
+		this.jobPosts = new ArrayList<jobPost>();
+		
 	}
 	
-
-	public static Document getXMLDocumentFromInternalFile(String internalUrl) throws IOException, URISyntaxException{
+	public ArrayList<jobPost> setSearches() throws IOException, URISyntaxException, InterruptedException, ExecutionException {
 		
-		InputStream webpage_config = getWebPage.class
+		this.xml_config = getXMLDocumentFromInternalFile(config_url);
+		/**
+		 * LA IDEA AHORA ES:
+		 * SEPARAR, EN EL XML, ENTRE APIS Y WEB_PAGES (BUSCAR ALGUN EJEMPLO POR INTERNET)
+		 * UNA VEZ SEPARADO, DETECTAR CUANTOS ELEMENTOS TIENE EL XML
+		 * CREAR CON ELLOS LAS VARIABLES POOL Y DEMAS.
+		 * 
+		 * DESPUES, DENTRO DEL POOL, COGER ELEMENTO, SABER SI ES API O WEBPAGE, Y SEGUN EXO APLICARLE EL OBJETO CORRESPONDIENTE
+		 * 
+		 * ESTO HARA QUE CASI TODO EL PROGRAMA ENTERO SEEA PRACTICAMENTE AUTOMATICO: CON SOLO ANYADIR
+		 * LOS DATOS CORRECTOS EN EL XML ( EN EL CUAL SE PODRIA HACER UN DTD), TODO FUNCIONARA Y SE ANADIRA UN LINK MAS
+		 * LUEGO, SEGURAMENTE ( Y ESPECIALMENTE SI ES WEB_CRAWLIGN, DEBERMOS HACER SU METODO
+		 * VA A SER UN GRAN PROGRAMA: LO PRESIENTO
+		 */
+		
+		
+		//ExecutorService executorService = Executors.newFixedThreadPool(searchNames.length);
+		ExecutorService executorService = Executors.newFixedThreadPool(1);
+		
+		List<Callable<ArrayList<jobPost>>> lst = new ArrayList<Callable<ArrayList<jobPost>>>();
+		
+		//for (int i=0 ; i < searchNames.length ; i++ ){
+		for (int i=0 ; i < 1 ; i++ ){
+			
+			lst.add( new webCrawlerObject(xml_config, searchNames[0], search.getArrayWords() ));
+			lst.add( new APIObject(xml_config, searchNames[3], search.getCompleteSearch()));
+			lst.add( new webCrawlerObject(xml_config, searchNames[1], search.getArrayWords() ));
+			lst.add( new APIObject(xml_config, searchNames[2], search.getCompleteSearch()));
+		}
+		
+		List<Future<ArrayList<jobPost>>> futureList = executorService.invokeAll(lst);
+		
+		 
+        for(Future<ArrayList<jobPost>> future : futureList)
+        {
+        	for(jobPost final_job : future.get()){
+        		jobPosts.add(final_job);
+        		//System.out.println(final_job.getCompany());
+        	}
+        	
+        }
+        
+        return jobPosts;
+		
+		//JobSource job1 = new APIObject(xml_config, searchNames[1], search.getCompleteSearch());
+		//JobSource job2 = new webCrawlerObject(xml_config, searchNames[2], search.getArrayWords());
+		
+		
+	}
+
+	public static Document getXMLDocumentFromInternalFile (String internalUrl) throws IOException, URISyntaxException{
+		
+		InputStream webpage_config = BuilderSearcher.class
 			           .getClassLoader()
 			           .getResourceAsStream(internalUrl);
 	          
-	     URL url_web_page = getWebPage.class.
+	     URL url_web_page = BuilderSearcher.class.
 	     		getClassLoader().
 	     		getResource(internalUrl);
 	     
@@ -75,7 +142,7 @@ public class getWebPage {
 		
 	}
 
-	
+	/**
 	public ArrayList<jobPost> BerlinStartupJobs() throws Exception{
 		
 		ArrayList<jobPost> jobPosts = new ArrayList<>();
@@ -103,6 +170,8 @@ public class getWebPage {
 		
 		String name = "BerlinJob";
 		
+		System.out.println(" ----->\tUsing next Web Source " + name);
+		
 		webCrawlerObject webObject = new webCrawlerObject(xml_config, name, search.getArrayWords());
 		
 		webObject.getwebCrawlerDataRequest();
@@ -112,7 +181,9 @@ public class getWebPage {
 		return jobPosts;
 		
 	}
+	**/
 	
+	/**
 	public ArrayList<jobPost> IndeedJobs() throws Exception{
 		
 		ArrayList<jobPost> jobPosts = new ArrayList<>();
@@ -121,9 +192,11 @@ public class getWebPage {
 		
 		String name = "Indeed";
 		
+		System.out.println(" ----->\tUsing next Web Source " + name);
+		
 		APIObject api = new APIObject(xml_config, name);
 		
-		api.getAPIDataRequest();
+		api.setAPIDataRequest();
 		
 		api.setAPIRequest(search.getCompleteSearch());
 		
@@ -145,9 +218,11 @@ public class getWebPage {
 		
 		String name = "CareerBuilder";
 		
+		System.out.println(" ----->\tUsing next Web Source " + name);
+		
 		APIObject api = new APIObject(xml_config, name);
 		
-		api.getAPIDataRequest();
+		api.setAPIDataRequest();
 		
 		api.setAPIRequest(search.getCompleteSearch());
 		
@@ -160,6 +235,7 @@ public class getWebPage {
         return jobPosts;
 		
 	}
+	**/
 	
 	/**
 	public ArrayList<jobPost> CareerBuilderJobs() throws Exception{
