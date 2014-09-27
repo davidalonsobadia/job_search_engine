@@ -26,6 +26,14 @@ public class InitSearch extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private int pageSize = 4;
+	private int currentPage = 1;
+	private int pageWindow = 2;
+	
+	private ArrayList<jobPost> jobs;
+	
+	
+	
     public InitSearch() {
         super();
         // TODO Auto-generated constructor stub
@@ -40,37 +48,68 @@ public class InitSearch extends HttpServlet {
 		System.out.println("\t\tNEW SEARCH DONE IN OUR WEB PAGE");
 		System.out.println("========================================================================\n");
 		
+		this.currentPage = 1;
+		
 		String search = request.getParameter("Search").trim();
 		System.out.println("Servlet-Post Method");
 
+		jobs = new ArrayList<>();
 		
 		StringSearch sSearch = new StringSearch();
 		sSearch.setCompleteSearch(search);
 		
 		BuilderSearcher builderSearch = new BuilderSearcher(sSearch);
-		
-		ArrayList<jobPost> jobs = new ArrayList<>();
-		
-		
+
 		
 		try {
-			
 			jobs.addAll(builderSearch.setSearches());
-			//jobs.addAll(web_pages.BerlinStartupJobs());
-			//jobs.addAll(web_pages.IndeedJobs());
-			//jobs.addAll(web_pages.BerlinJob());
-			//jobs.addAll(web_pages.CareerBuilderJobs());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("ERROR: Unexpected exti from Servlet ( Controller)");
+			System.out.println(e);
 		}
-				
-		request.setAttribute("JobsList", jobs);
-		request.setAttribute("search", search);
-		request.getRequestDispatcher("searchSuccess.jsp").forward(request, response);
-			
 		
+		Pageable pageable = new Pageable(jobs);
+		
+		pageable.setPageSize(pageSize);
+		pageable.setPage(currentPage);
+		pageable.setPageWindow(pageWindow);
+		
+		ArrayList<jobPost> chunkJobs = new ArrayList<jobPost> (pageable.getListForPage());
+				
+		request.setAttribute("JobsList", chunkJobs);
+		request.setAttribute("search", search);
+		
+		request.setAttribute("maxPageRange", pageable.getMaxPageRange());
+		request.setAttribute("minPageRange", pageable.getMinPageRange());
+        request.setAttribute("currentPage", pageable.getPage());
+        
+		
+		request.getRequestDispatcher("searchSuccess.jsp").forward(request, response);
 		
 	}
-
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       
+		if(request.getParameter("page") != null)
+            currentPage = Integer.parseInt(request.getParameter("page"));
+		
+		Pageable pageable = new Pageable(jobs);
+		
+		pageable.setPageSize(pageSize);
+		pageable.setPage(currentPage);
+		pageable.setPageWindow(pageWindow);
+				
+		request.setAttribute("maxPageRange", pageable.getMaxPageRange());
+		request.setAttribute("minPageRange", pageable.getMinPageRange());
+		request.setAttribute("currentPage", pageable.getPage());
+        
+        ArrayList<jobPost> chunkJobs = new ArrayList<jobPost> (pageable.getListForPage());
+		
+		request.setAttribute("JobsList", chunkJobs);
+		
+		request.getRequestDispatcher("searchSuccess.jsp").forward(request, response);
+		
+	}
+	
 }

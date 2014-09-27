@@ -100,6 +100,8 @@ public class BuilderSearcher {
         	}
         }
         
+        System.out.println("TOTAL Number of results: " + jobPosts.size());
+        
         return jobPosts;
 		
 	}

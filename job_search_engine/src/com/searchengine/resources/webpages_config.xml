@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web_pages>
-    <web_page id="BerlinStartupJobs">
+    <web id="BerlinStartupJobs" type="web_page">
         <name>Berlin Startup Jobs</name>
         <logo>http://22iiaa2jpzc63c93rf3p9oti14j8.wpengine.netdna-cdn.com/wp-content/uploads/2011/07/berlin-startup-jobs-logo.png</logo>
         <urls>
@@ -20,9 +20,9 @@
             <post-company>not_used</post-company>
             <post-date-format>MMM d, yyyy</post-date-format>
         </post-tags>
-    </web_page>
+    </web>
     
-     <api id="Indeed">
+     <api id="Indeed" type="api">
      	<name>Indeed Jobs</name>
      	<logo>http://www.indeed.com/images/job_search_indeed.png</logo>
      	<urls>
@@ -52,7 +52,7 @@
      	
      </api>
        
-     <web_page id="BerlinJob">
+     <web id="BerlinJob" type="web_page">
      	<name>Berlin Job</name>
      	<logo>http://www.logoeps.net/wp-content/uploads/2013/04/monster-com-logo.jpg</logo>
 
@@ -73,9 +73,9 @@
             <post-link>a</post-link>
             <post-date-format>not_used</post-date-format>
      	</post-tags>
-     </web_page>
+     </web>
      
-     <api id="CareerBuilder">
+     <api id="CareerBuilder" type="api">
      	<name>Career Builder</name>
      	<logo>http://www.careerrocketeer.com/wp-content/uploads/CareerBuilder.png</logo>
      	<urls>
