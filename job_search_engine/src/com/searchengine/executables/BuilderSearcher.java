@@ -72,33 +72,22 @@ public class BuilderSearcher {
 	public ArrayList<jobPost> setSearches() throws IOException, URISyntaxException, InterruptedException, ExecutionException {
 		
 		this.xml_config = getXMLDocumentFromInternalFile(config_url);
-		/**
-		 * LA IDEA AHORA ES:
-		 * SEPARAR, EN EL XML, ENTRE APIS Y WEB_PAGES (BUSCAR ALGUN EJEMPLO POR INTERNET)
-		 * UNA VEZ SEPARADO, DETECTAR CUANTOS ELEMENTOS TIENE EL XML
-		 * CREAR CON ELLOS LAS VARIABLES POOL Y DEMAS.
-		 * 
-		 * DESPUES, DENTRO DEL POOL, COGER ELEMENTO, SABER SI ES API O WEBPAGE, Y SEGUN EXO APLICARLE EL OBJETO CORRESPONDIENTE
-		 * 
-		 * ESTO HARA QUE CASI TODO EL PROGRAMA ENTERO SEEA PRACTICAMENTE AUTOMATICO: CON SOLO ANYADIR
-		 * LOS DATOS CORRECTOS EN EL XML ( EN EL CUAL SE PODRIA HACER UN DTD), TODO FUNCIONARA Y SE ANADIRA UN LINK MAS
-		 * LUEGO, SEGURAMENTE ( Y ESPECIALMENTE SI ES WEB_CRAWLIGN, DEBERMOS HACER SU METODO
-		 * VA A SER UN GRAN PROGRAMA: LO PRESIENTO
-		 */
 		
-		
-		//ExecutorService executorService = Executors.newFixedThreadPool(searchNames.length);
-		ExecutorService executorService = Executors.newFixedThreadPool(1);
+				
+		ExecutorService executorService = Executors.newFixedThreadPool(searchNames.length);
 		
 		List<Callable<ArrayList<jobPost>>> lst = new ArrayList<Callable<ArrayList<jobPost>>>();
 		
-		//for (int i=0 ; i < searchNames.length ; i++ ){
-		for (int i=0 ; i < 1 ; i++ ){
+		for (int i=0 ; i < searchNames.length ; i++ ){
 			
-			lst.add( new webCrawlerObject(xml_config, searchNames[0], search.getArrayWords() ));
-			lst.add( new APIObject(xml_config, searchNames[3], search.getCompleteSearch()));
-			lst.add( new webCrawlerObject(xml_config, searchNames[1], search.getArrayWords() ));
-			lst.add( new APIObject(xml_config, searchNames[2], search.getCompleteSearch()));
+			String xml_item = xml_config.getElementById(searchNames[i]).attr("type");
+			
+			if (xml_item.equalsIgnoreCase("api")) {
+				lst.add( new APIObject(xml_config, searchNames[i], search.getCompleteSearch()));
+			} else if (xml_item.equalsIgnoreCase("web_page")){
+				lst.add( new webCrawlerObject(xml_config, searchNames[i], search.getArrayWords() ));
+			}
+
 		}
 		
 		List<Future<ArrayList<jobPost>>> futureList = executorService.invokeAll(lst);
@@ -108,16 +97,10 @@ public class BuilderSearcher {
         {
         	for(jobPost final_job : future.get()){
         		jobPosts.add(final_job);
-        		//System.out.println(final_job.getCompany());
         	}
-        	
         }
         
         return jobPosts;
-		
-		//JobSource job1 = new APIObject(xml_config, searchNames[1], search.getCompleteSearch());
-		//JobSource job2 = new webCrawlerObject(xml_config, searchNames[2], search.getArrayWords());
-		
 		
 	}
 
@@ -142,197 +125,6 @@ public class BuilderSearcher {
 		
 	}
 
-	/**
-	public ArrayList<jobPost> BerlinStartupJobs() throws Exception{
-		
-		ArrayList<jobPost> jobPosts = new ArrayList<>();
-		
-		Document xml_config = getXMLDocumentFromInternalFile(config_url);
-		
-		String name = "BerlinStartupJobs";
-		
-		webCrawlerObject webObject = new webCrawlerObject(xml_config, name, search.getArrayWords());
-		
-		webObject.getwebCrawlerDataRequest();
-			
-		jobPosts = webObject.setwebCrawlerRequest();
-			
-		return jobPosts;
-		
-	}
-
-	
-	public ArrayList<jobPost> BerlinJob() throws Exception{
-		
-		ArrayList<jobPost> jobPosts = new ArrayList<>();
-		
-		Document xml_config = getXMLDocumentFromInternalFile(config_url);
-		
-		String name = "BerlinJob";
-		
-		System.out.println(" ----->\tUsing next Web Source " + name);
-		
-		webCrawlerObject webObject = new webCrawlerObject(xml_config, name, search.getArrayWords());
-		
-		webObject.getwebCrawlerDataRequest();
-			
-		jobPosts = webObject.setwebCrawlerRequest();
-			
-		return jobPosts;
-		
-	}
-	**/
-	
-	/**
-	public ArrayList<jobPost> IndeedJobs() throws Exception{
-		
-		ArrayList<jobPost> jobPosts = new ArrayList<>();
-		
-		Document xml_config = getXMLDocumentFromInternalFile(config_url);
-		
-		String name = "Indeed";
-		
-		System.out.println(" ----->\tUsing next Web Source " + name);
-		
-		APIObject api = new APIObject(xml_config, name);
-		
-		api.setAPIDataRequest();
-		
-		api.setAPIRequest(search.getCompleteSearch());
-		
-		api.getAPIResponse();
-	
-		api.getAPIDataResponse();
-			
-		jobPosts = api.setAPIResponse(); 
-		        
-        return jobPosts;
-		
-	}
-	
-	public ArrayList<jobPost> CareerBuilderJobs() throws Exception{
-		
-		ArrayList<jobPost> jobPosts = new ArrayList<>();
-		
-		Document xml_config = getXMLDocumentFromInternalFile(config_url);
-		
-		String name = "CareerBuilder";
-		
-		System.out.println(" ----->\tUsing next Web Source " + name);
-		
-		APIObject api = new APIObject(xml_config, name);
-		
-		api.setAPIDataRequest();
-		
-		api.setAPIRequest(search.getCompleteSearch());
-		
-		api.getAPIResponse();
-	
-		api.getAPIDataResponse();
-			
-		jobPosts = api.setAPIResponse(); 
-		        
-        return jobPosts;
-		
-	}
-	**/
-	
-	/**
-	public ArrayList<jobPost> CareerBuilderJobs() throws Exception{
-		 
-		ArrayList<jobPost> jobPosts = new ArrayList<>();
-		
-        Document xml_config = getXMLDocumentFromInternalFile(config_url);
-		
-        Element item = xml_config.getElementById("CareerBuilder");
-        
-        Element api = item.getElementsByTag("api").first();
-        
-        String name = item.select("name").first().text();
- 	    
-        String root_url = api.select("root_url").first().text();
- 	   	String publisher_id = api.select("publisher_id").first().text();
- 	   	String query = api.select("query").first().text();
- 	   	String location = api.select("location").first().text();
- 	   	String user_agent = api.select("user_agent").first().text();
- 	   	
- 	   try {
-			
-			String search_adapted = URLEncoder.encode(search.getCompleteSearch().replace(" ", "+"), "UTF-8");
-			String user_agent_adapted = URLEncoder.encode(user_agent, "UTF-8");
-					
-			String query_api =  root_url + "&" + publisher_id + "&" + query 
-					+ search_adapted + "&" + location;
-			
-			
-			// MAKE THE QUERY
-			
-			Document doc = Jsoup.connect(query_api).userAgent("Mozilla").get();
-		
- 			// GET RESPONSE AND MANIPULATE IT
- 			
- 			Elements tags = item.getElementsByTag("post-tags");
- 			
- 			String tag_container = tags.select("post-container").first().text();
- 			String tag_title = tags.select("post-title").first().text();
- 			String tag_description = tags.select("post-description").first().text();
- 			String tag_date = tags.select("post-date").first().text();
- 			String tag_link = tags.select("post-link").first().text();
- 			String tag_company = tags.select("post-company").first().text(); 
- 			
-			 			
- 			Element loop = doc.getElementsByTag(tag_container).first();
- 					        
-		    // Get all posts
-	        Elements posts = loop.children();
-	        
-	        //For each post
-	        for (Element post : posts) {
-		        
-	 			System.out.println(post);
-	        	
-		        // Get title 
-	        	String title = post.getElementsByTag(tag_title).text();
-		               
-		        //description
-		        String description = post.getElementsByTag(tag_description).text();
-
-		        // Get date
-		        String datePost = post.getElementsByTag(tag_date).text();
-		        Date date = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa", Locale.ENGLISH).parse(datePost);
-		        
-		        //link
-		        String link = post.getElementsByTag(tag_link).text();
-		        
-		        // company
-		        String company = post.getElementsByTag(tag_company).text();
-		        
-		        System.out.println(link);
-		        
-		        
-		        // ADD INTERESTING RESULTS
-		        
-		        jobPost job = new jobPost();
-		        job.setTitle(title);
-		        job.setCompany(company);
-		        job.setDate(date);
-		        job.setDescription(description);
-		        job.setLink(link);
-		        job.setSource(name);
-		        
-		        jobPosts.add(job);
-			        
-	        }
-		
-	    } catch (Exception e) {
-	    	System.out.println("Exception handling resquest from: " + name);
-	    	System.out.print(e);
-	    }
- 	   
- 	  return jobPosts;
-	}
-	
-	**/
 
 	public ArrayList<jobPost> LinkedinJobs() throws Exception{
 
