@@ -30,6 +30,8 @@ public class InitSearch extends HttpServlet {
 	private int currentPage = 1;
 	private int pageWindow = 2;
 	
+	private String search = null;
+	
 	private ArrayList<jobPost> jobs;
 	
 	
@@ -39,44 +41,51 @@ public class InitSearch extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-
     
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		System.out.println("\n========================================================================");
-		System.out.println("\t\tNEW SEARCH DONE IN OUR WEB PAGE");
-		System.out.println("========================================================================\n");
+		if(request.getParameter("page") == null){
+			
+			System.out.println("\n========================================================================");
+			System.out.println("\t\tNEW SEARCH DONE IN OUR WEB PAGE");
+			System.out.println("========================================================================\n");
+			
+			this.currentPage = 1;
+			
+			this.search = request.getParameter("Search").trim();
+			System.out.println("Servlet-Post Method");
+	
+			jobs = new ArrayList<>();
+			
+			StringSearch sSearch = new StringSearch();
+			sSearch.setCompleteSearch(search);
+			
+			BuilderSearcher builderSearch = new BuilderSearcher(sSearch);
+			
+			
+	
+			try {
+				jobs.addAll(builderSearch.setSearches());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("ERROR: Unexpected exit from Servlet ( Controller)");
+				System.out.println(e);
+			}
 		
-		this.currentPage = 1;
-		
-		String search = request.getParameter("Search").trim();
-		System.out.println("Servlet-Post Method");
-
-		jobs = new ArrayList<>();
-		
-		StringSearch sSearch = new StringSearch();
-		sSearch.setCompleteSearch(search);
-		
-		BuilderSearcher builderSearch = new BuilderSearcher(sSearch);
-
-		
-		try {
-			jobs.addAll(builderSearch.setSearches());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("ERROR: Unexpected exti from Servlet ( Controller)");
-			System.out.println(e);
+		} else {
+			
+			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
-		
-		Pageable pageable = new Pageable(jobs);
+					
+		Pageable<jobPost> pageable = new Pageable<jobPost>(jobs);
 		
 		pageable.setPageSize(pageSize);
 		pageable.setPage(currentPage);
 		pageable.setPageWindow(pageWindow);
 		
 		ArrayList<jobPost> chunkJobs = new ArrayList<jobPost> (pageable.getListForPage());
-				
+		
 		request.setAttribute("JobsList", chunkJobs);
 		request.setAttribute("search", search);
 		
@@ -84,32 +93,12 @@ public class InitSearch extends HttpServlet {
 		request.setAttribute("minPageRange", pageable.getMinPageRange());
         request.setAttribute("currentPage", pageable.getPage());
         
-		
 		request.getRequestDispatcher("searchSuccess.jsp").forward(request, response);
 		
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
-		if(request.getParameter("page") != null)
-            currentPage = Integer.parseInt(request.getParameter("page"));
-		
-		Pageable pageable = new Pageable(jobs);
-		
-		pageable.setPageSize(pageSize);
-		pageable.setPage(currentPage);
-		pageable.setPageWindow(pageWindow);
-				
-		request.setAttribute("maxPageRange", pageable.getMaxPageRange());
-		request.setAttribute("minPageRange", pageable.getMinPageRange());
-		request.setAttribute("currentPage", pageable.getPage());
-        
-        ArrayList<jobPost> chunkJobs = new ArrayList<jobPost> (pageable.getListForPage());
-		
-		request.setAttribute("JobsList", chunkJobs);
-		
-		request.getRequestDispatcher("searchSuccess.jsp").forward(request, response);
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
-	
+
 }

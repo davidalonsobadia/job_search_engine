@@ -30,10 +30,14 @@
 	<div class=container>
 		<div class = "search_header">
 			<div class="new-search">
-				<form action="InitSearch" method="post">
+				<form action="InitSearch" method="get">
 					<input id="search-form" type="text" name="Search"></input>
 					<input id="search-button" type="submit" value="New Search"></input>
 				</form>
+			</div>
+			<div class = "menu_options">
+				<p><a href="mainPage.html">Home</a></p>
+				<p>About</p>
 			</div>
 		</div>	
 
@@ -84,34 +88,31 @@
 					</ul>
 				</div>
 			</div>
-		</div>	
-		<div class="container-footer">
-			<%--For displaying Previous link except for the 1st page --%>
-		    <c:if test="${currentPage != 1 && maxPageRange >= 1}">
-		        <td><a href="InitSearch?page=${currentPage - 1}">Previous</a></td>
-		    </c:if>
-		 
-		    <%--For displaying Page numbers. 
-		    The when condition does not display a link for the current page--%>
-		    <table border="1" cellpadding="5" cellspacing="5">
-		        <tr>
-		            <c:forEach begin="${minPageRange}" end="${maxPageRange}" var="i">
-		                <c:choose>
-		                    <c:when test="${currentPage eq i}">
-		                        <td>${i}</td>
-		                    </c:when>
-		                    <c:otherwise>
-		                        <td><a href="InitSearch?page=${i}">${i}</a></td>
-		                    </c:otherwise>
-		                </c:choose>
-		            </c:forEach>
-		        </tr>
-		    </table>
-		     
-		    <%--For displaying Next link --%>
-		    <c:if test="${currentPage lt maxPageRange}">
-		        <td><a href="employee.do?page=${currentPage + 1}">Next</a></td>
-		    </c:if>
+			<div class="paginator">
+				<%--For displaying Previous link except for the 1st page --%>
+				<ul>
+			    <c:if test="${currentPage != 1 && maxPageRange >= 1}">
+			        <li class="extrem"><a href="InitSearch?page=${currentPage - 1}">&#10094;&#10094;Previous</a></li>
+			    </c:if>
+			 
+			    <%--For displaying Page numbers. 
+			    The when condition does not display a link for the current page--%>
+	            <c:forEach begin="${minPageRange}" end="${maxPageRange}" var="i">
+	                <c:choose>
+	                    <c:when test="${currentPage eq i}">
+	                        <li>${i}</li>
+	                    </c:when>
+	                    <c:otherwise>
+	                        <li><a href="InitSearch?page=${i}">${i}</a></li>
+	                    </c:otherwise>
+	                </c:choose>
+	            </c:forEach>
+			    <%--For displaying Next link --%>
+			    <c:if test="${currentPage lt maxPageRange}">
+			        <li class="extrem"><a href="InitSearch?page=${currentPage + 1}">Next&#10095;&#10095;</a></li>
+			    </c:if>
+			    </ul>
+			</div>
 		</div>
 	</div>
 </body>

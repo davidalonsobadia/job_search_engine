@@ -22,12 +22,50 @@ html,body{
 	border-bottom-color: white;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
+
+	overflow: hidden;
 }
+
 
 .new-search{
 	padding-top: 1.5%;
 	padding-left: 5%;
 	padding-bottom: 1.2%;
+
+	float: left;	
+}
+
+.menu_options {
+
+	width: 17%;
+	
+	float: right;
+
+	margin-top: 2%;
+
+	
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #565A5C;
+	
+}
+
+.menu_options p{
+
+	padding-left: 12.5%;
+	padding-right: 12.5%;
+	padding-top: 5%;
+	padding-bottom: 6%;
+
+	display: inline;
+
+	color: #FFF;
+
+	border-left: #FFF solid 1px;
+}
+
+.menu_options p a{
+	text-decoration: none;
+	color: #FFF;
 }
 
 #search-form{
@@ -164,12 +202,14 @@ html,body{
 	cursor: pointer;
 }
 
+
+
 .container-content{
 
 	background-color: #F7F7F7;
 	width: 100%;
-	min-height: 90%;
-
+	min-height: 50%;
+	
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #565A5C;
 }
@@ -256,10 +296,43 @@ html,body{
 	border-top-width: 1px;
 }
 
-/**
-li img {
-  float: left;
-  margin: 0 15px 0 0;
+.paginator{
+	
+	background-color: #F7F7F7;
+	width: 100%;
+	height: 10%;
+	margin: 0%;
+	padding: 0%;
+
+	text-align: center;
+
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #565A5C;
+	
+	text-decoration: none;
+	border-bottom: none;	
 }
 
-**/
+.paginator li {
+
+	list-style-type: none;
+	display: inline;
+
+	margin-left: 0.20%;
+
+	padding: 0.75%;
+	padding-top: 0.55%;
+	padding-bottom: 0.55%;
+
+	border: #565A5C solid 2px;
+	border-radius: 15%;
+}
+
+.paginator li a{
+	text-decoration: none;
+	color: #565A5C;
+}
+
+.paginator li.extrem {
+	border: none;
+}
