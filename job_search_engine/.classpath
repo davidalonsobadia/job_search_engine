@@ -14,5 +14,15 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="/Users/davidalonso/Documents/eclipse_workspace/external_libraries/jsoup-1.7.3.jar"/>
+	<classpathentry kind="lib" path="/Users/davidalonso/Documents/eclipse_workspace/external_libraries/langdetect-03-03-2014/lib/jsonic-1.2.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/davidalonso/Documents/eclipse_workspace/external_libraries/langdetect-03-03-2014/lib/langdetect.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

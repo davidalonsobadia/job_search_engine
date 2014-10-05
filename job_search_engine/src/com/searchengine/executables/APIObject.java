@@ -15,6 +15,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.cybozu.labs.langdetect.LangDetectException;
+
 public class APIObject extends JobSource implements Callable{
 
 	private String nameAPI;
@@ -53,6 +55,7 @@ public class APIObject extends JobSource implements Callable{
 	
 	public APIObject (Document xml, String name, String CompleteSearch){
 				
+		super();
 		xml_item = xml.getElementById(name);
 		this.completeSearch = CompleteSearch;
 	}
@@ -136,7 +139,7 @@ public class APIObject extends JobSource implements Callable{
 		
 	}
 	
-	public ArrayList<jobPost> setAPIResponse(){
+	public ArrayList<jobPost> setAPIResponse() throws LangDetectException{
 		
 		ArrayList<jobPost> jobs = new ArrayList<>();
 		
@@ -173,17 +176,19 @@ public class APIObject extends JobSource implements Callable{
 	        // company
 	        String company = post.getElementsByTag(tag_company).text();
 	                
+	        if (identifyLanguage(description)){
 	        
-	        //
-	        jobPost job = new jobPost();
-	        job.setTitle(title);
-	        job.setCompany(company);
-	        job.setDate(date);
-	        job.setDescription(description);
-	        job.setLink(link);
-	        job.setSource(nameAPI);
-	        
-	        jobs.add(job);	        
+		        //add job to the list
+		        jobPost job = new jobPost();
+		        job.setTitle(title);
+		        job.setCompany(company);
+		        job.setDate(date);
+		        job.setDescription(description);
+		        job.setLink(link);
+		        job.setSource(nameAPI);
+		        
+		        jobs.add(job);	      
+	        }
         }
         
 	    System.out.println("Job posts found in " 

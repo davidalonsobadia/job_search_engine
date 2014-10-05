@@ -31,10 +31,43 @@ html,body{
 .down-page{
 	background-color: #23304A;
 	width: 100%;
-	height: 20%;
-	margin: 0%;
-	padding: 0%;
 
+	border-bottom-color: white;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+
+	overflow: hidden;
+}
+
+.menu_options {
+
+	width: 17%;
+	
+	float: right;
+	margin-top: 2%;
+	margin-bottom: 1%;	
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #565A5C;
+	
+}
+
+.menu_options p{
+
+	padding-left: 12.5%;
+	padding-right: 12.5%;
+	padding-top: 5%;
+	padding-bottom: 6%;
+
+	display: inline;
+
+	color: #FFF;
+
+	border-left: #FFF solid 1px;
+}
+
+.menu_options p a{
+	text-decoration: none;
+	color: #FFF;
 }
 
 #central-message{

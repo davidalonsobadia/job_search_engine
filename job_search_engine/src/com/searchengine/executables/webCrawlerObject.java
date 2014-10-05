@@ -11,6 +11,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.cybozu.labs.langdetect.Detector;
+import com.cybozu.labs.langdetect.DetectorFactory;
+import com.cybozu.labs.langdetect.LangDetectException;
+
 public class webCrawlerObject extends JobSource implements Callable{
 
 	private String nameWebCrawler;
@@ -38,7 +42,8 @@ public class webCrawlerObject extends JobSource implements Callable{
 	private String tag_date_format;
 		
 	public webCrawlerObject (Document xml, String name, String searchWords[]){
-			
+				
+		super();
 		this.xml_item = xml.getElementById(name);
 		this.jobPosts = new ArrayList<jobPost>();
 		this.searchWords = searchWords;
@@ -165,7 +170,7 @@ public class webCrawlerObject extends JobSource implements Callable{
 		        //String[] texts = {description, title};
 		        String[] texts = {title};
 		        
-		        if (checkMatch(texts, searchWords)) {
+		        if (checkMatch(texts, searchWords) && identifyLanguage(description)) {
 			        
 		        	// ADD RESULTS	        	
 		        	
@@ -244,6 +249,9 @@ public class webCrawlerObject extends JobSource implements Callable{
 	   
 	   return jobsInWebPage;
 	}
+	
+
+
 
 }
 

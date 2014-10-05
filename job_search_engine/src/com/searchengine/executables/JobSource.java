@@ -2,10 +2,23 @@ package com.searchengine.executables;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.cybozu.labs.langdetect.Detector;
+import com.cybozu.labs.langdetect.DetectorFactory;
+import com.cybozu.labs.langdetect.LangDetectException;
+
 public abstract class JobSource{
 	
 	private String JobSourceName;
 	
+	public JobSource(){
+		try {
+			DetectorFactory.loadProfile("src/com/searchengine/languageprofiles/");
+		} catch (LangDetectException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception loading profiles for Language detection library");
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public boolean checkMatch(String[] texts, String[] searchWords){
@@ -34,9 +47,27 @@ public abstract class JobSource{
 		return false;
 	}
 	
-	public static boolean detectLanguage(String text){
+	public boolean identifyLanguage(String text) throws LangDetectException{
 		
-		return false;
-	}
+		String langDetected = null;
+		
+		try {
+			
+
+			Detector detector = DetectorFactory.create();
+			
+			detector.append(text);
+			
+			langDetected = detector.detect();
+			
+		} catch (LangDetectException e) {
+			System.out.println("An error occur while detecting language");
+			e.printStackTrace();
+		}
+		
+		if (langDetected.equals("en")) return true;
+		else return false;
+		
+	}	
 }
 

@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cybozu.labs.langdetect.DetectorFactory;
+import com.cybozu.labs.langdetect.LangDetectException;
+
 
 
 /**
@@ -36,8 +39,10 @@ public class InitSearch extends HttpServlet {
 	
 	
 	
-    public InitSearch() {
+    public InitSearch(){
+    	
         super();
+        
         // TODO Auto-generated constructor stub
     }
 
