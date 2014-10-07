@@ -98,8 +98,8 @@
 									      		</tr>
 								      		</table> 
 									    </td>
-								    </tr>
-								  </table>	  
+								    	</tr>
+								  	</table>	  
 								</li>
 							</a>
 						</c:forEach>	    
