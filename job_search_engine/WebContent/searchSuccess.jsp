@@ -37,7 +37,7 @@
 			</div>
 			<div class = "menu_options">
 				<p><a href="mainPage.html">Home</a></p>
-				<p>About</p>
+				<p><a href="about.html">About</a></p>
 			</div>
 		</div>	
 
@@ -53,6 +53,7 @@
 				<div class="jobList">
 					<ul>
 						<c:forEach items="${JobsList}" var="job" varStatus="loopCounter" >
+							<a href=<c:out value="${job.link}"/> >
 							<c:choose>
 								<c:when test="${loopCounter.isFirst()}">
 								    <li onmouseover="change_border()" onmouseout="normal_border()">
@@ -61,29 +62,46 @@
 									<li>
 								</c:otherwise>								
 							</c:choose>
-					      			<h3> <a href=<c:out value="${job.link}"/> ><c:out value="${job.title}"/></a> </h3>
-						      			<p>Description: 
-						      				<c:choose>
-							      				<c:when test="${empty job.description}">
-							      					Not available
-							      				</c:when>
-							      				<c:otherwise>
-							      					<c:out value="${job.description}"/></p>
-							      				</c:otherwise>
-							      			</c:choose>						      				
-						      			</p>
-						      			<p>Date: 
-						      				<c:choose>
-							      				<c:when test="${empty job.date}">
-							      					Not available
-							      				</c:when>
-							      				<c:otherwise>
-							      					<fmt:formatDate type="date" value="${job.date}"/>
-							      				</c:otherwise>
-							      			</c:choose>
-						      			</p>
-						      			<p>Found in: <c:out value="${job.source}"/></p>
-								    </li>
+									<table>
+									<tr>
+										<td>
+											<img src="<c:out value="${job.thumbnail}"/>">
+										</td>
+										<td>
+						      				<h3> <c:out value="${job.title}"/> </h3>
+						      				<p>Company: <c:out value="${job.company}"/></p>
+							      			<p>Description: 
+							      				<c:choose>
+								      				<c:when test="${empty job.description}">
+								      					Not available
+								      				</c:when>
+								      				<c:otherwise>
+								      					<c:out value="${job.description}"/>
+								      				</c:otherwise>
+								      			</c:choose>	
+											</p>					      				
+							      			<table style="width:100%">
+							      				<tr>
+													<td>
+									      			<p>Date: 
+									      				<c:choose>
+										      				<c:when test="${empty job.date}">
+										      					Not available
+										      				</c:when>
+										      				<c:otherwise>
+										      					<fmt:formatDate type="date" value="${job.date}"/>
+										      				</c:otherwise>
+										      			</c:choose>		
+									      			</p>
+									      			</td>
+									      			<td><p>Found in: <c:out value="${job.source}"/></p></td>
+									      		</tr>
+								      		</table> 
+									    </td>
+								    </tr>
+								  </table>	  
+								</li>
+							</a>
 						</c:forEach>	    
 					</ul>
 				</div>

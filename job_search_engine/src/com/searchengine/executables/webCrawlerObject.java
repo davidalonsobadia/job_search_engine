@@ -11,13 +11,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.cybozu.labs.langdetect.Detector;
-import com.cybozu.labs.langdetect.DetectorFactory;
-import com.cybozu.labs.langdetect.LangDetectException;
-
-public class webCrawlerObject extends JobSource implements Callable{
+public class webCrawlerObject extends JobSource implements Callable<ArrayList<jobPost>>{
 
 	private String nameWebCrawler;
+	private String thumbnail;
 	
 	private String searchWords[];
 
@@ -43,7 +40,6 @@ public class webCrawlerObject extends JobSource implements Callable{
 		
 	public webCrawlerObject (Document xml, String name, String searchWords[]){
 				
-		super();
 		this.xml_item = xml.getElementById(name);
 		this.jobPosts = new ArrayList<jobPost>();
 		this.searchWords = searchWords;
@@ -61,6 +57,8 @@ public class webCrawlerObject extends JobSource implements Callable{
 		//Element item = xml_item.getElementById("BerlinStartupJobs");
 		   
 		nameWebCrawler = xml_item.select("name").first().text();
+		thumbnail = xml_item.select("thumbnail").first().text();
+		
 		    
 		Element main_web_url = xml_item.getElementsByTag("url_main").first();
 		web_urls = xml_item.getElementsByTag("url");
@@ -181,6 +179,7 @@ public class webCrawlerObject extends JobSource implements Callable{
 			        job.setDescription(description);
 			        job.setLink(linkTitle);
 			        job.setSource(this.nameWebCrawler);
+			        job.setThumbnail(this.thumbnail);
 			        				        
 			        jobsInWebPage.add(job);
 		        	
@@ -233,6 +232,7 @@ public class webCrawlerObject extends JobSource implements Callable{
 					        job.setDescription(null);
 					        job.setLink(linkTitle);
 					        job.setSource(nameWebCrawler);
+					        job.setThumbnail(this.thumbnail);
 					        
 					        jobsInWebPage.add(job);
 				        	

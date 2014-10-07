@@ -1,53 +1,24 @@
 package com.searchengine.executables;
 
 
-import org.jsoup.*;
-import org.jsoup.nodes.*;
-import org.jsoup.select.Elements;
-import org.jsoup.parser.Parser;
-import org.omg.CORBA.PRIVATE_MEMBER;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.ByteArrayInputStream;
-import java.text.SimpleDateFormat;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.parser.Parser;
 
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLEncoder;
-
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
+import com.cybozu.labs.langdetect.DetectorFactory;
+import com.cybozu.labs.langdetect.LangDetectException;
 
 public class BuilderSearcher {
 	
@@ -64,6 +35,17 @@ public class BuilderSearcher {
 			 "CareerBuilder"};
 	
 	public BuilderSearcher(StringSearch search){
+		
+		try {
+			
+			URL url = JobSource.class.getClassLoader().getResource("com/searchengine/languageprofiles/");			
+			DetectorFactory.loadProfile(url.getPath());
+		} catch (LangDetectException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception loading profiles for Language detection library");
+			e.printStackTrace();
+		}
+		
 		this.search = search;
 		this.jobPosts = new ArrayList<jobPost>();
 		

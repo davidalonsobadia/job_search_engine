@@ -12,6 +12,7 @@ public class jobPost {
 	private String company;
 	private String description;
 	private String source;
+	private String thumbnail;
 	
 	public jobPost(){
 	}
@@ -40,6 +41,10 @@ public class jobPost {
 		this.source = source;
 	}
 	
+	public void setThumbnail(String thumbnail){
+		this.thumbnail = thumbnail;
+	}
+	
 	// Get Methods
 	public String getTitle(){
 		return this.title;
@@ -64,4 +69,9 @@ public class jobPost {
 	public String getSource(){
 		return this.source;
 	}
+	
+	public String getThumbnail(){
+		return this.thumbnail;
+	}
+	
 }

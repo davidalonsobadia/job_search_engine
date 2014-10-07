@@ -1,5 +1,5 @@
 html,body{
-	background-color: green;
+	background-color: #F7F7F7;
 	margin: 0 auto;
 	padding: 0;
 	width: 100%;
@@ -8,7 +8,7 @@ html,body{
 
 .container{
 	position: absolute;
-	background-color: red;
+	background-color: #F7F7F7;
 	margin: 0 auto;
 	padding: 0;
 	width: 100%;
@@ -281,6 +281,13 @@ html,body{
 	
 	border-bottom: 1px solid transparent;
 	border-top: 1px solid transparent;
+}
+
+
+.jobList li img {
+	
+	margin-right: 20px;
+	
 }
 
 .jobList li:hover {

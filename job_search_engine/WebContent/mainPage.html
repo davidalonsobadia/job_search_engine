@@ -4,28 +4,15 @@
 		<link rel="stylesheet" href="style_main_page.css" />
 		<title>Berlin Jobs</title>
 	</head>
-
 	<body>
-		
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    	<!-- Include all compiled plugins (below), or include individual files as needed -->
-    	<script src="modal_function.js"></script>
-	
 		<div class="container">
-			<div class="down-page">
+			<div class="up-page">
 				<div class = "menu_options">
 					<p><a href="mainPage.html">Home</a></p>
-					<p><a data-toggle="modal" href="#aboutModal";>About</a></p>
+					<p><a href="about.html">About</a></p>
 				</div>
 			</div>
-			<div class="up-center-page">
-			
-					<!-- Button trigger modal -->
-	    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#aboutModal">
-	      Launch about modal
-	    </button>
-			
+			<div class="center-down-page">
 				<div class="central-statement">
 					<div id="central-message">
 						<div id="title">
@@ -44,30 +31,5 @@
 				</div>
 			</div>
 		</div>
-		
-
-	
-	    <!-- Modal -->
-	    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
-	      <div class="modal-dialog">
-	        <div class="modal-content">
-	          <div class="modal-header">
-	            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	            <h4 class="modal-title" id="aboutModalLabel">Working in English</h4>
-	          </div>
-	          <div class="modal-body">
-	            <p>Working in English is a personal project which I developed to learn more about Servlet/JSP and Java programming in General.</p>
-	
-	            <p>It uses several APIs to get all job data from different sources. It doesn't store any data. Just show results.</p>
-	
-	            <p>The purpose of the whole project was only academic.</p>
-	          </div>
-	          <div class="modal-footer">
-	            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-
 	</body>
 </html>

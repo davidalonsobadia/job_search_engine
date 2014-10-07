@@ -8,18 +8,6 @@ import com.cybozu.labs.langdetect.LangDetectException;
 
 public abstract class JobSource{
 	
-	private String JobSourceName;
-	
-	public JobSource(){
-		try {
-			DetectorFactory.loadProfile("src/com/searchengine/languageprofiles/");
-		} catch (LangDetectException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Exception loading profiles for Language detection library");
-			e.printStackTrace();
-		}
-	}
-	
 	
 	public boolean checkMatch(String[] texts, String[] searchWords){
 		

@@ -17,9 +17,10 @@ import org.jsoup.select.Elements;
 
 import com.cybozu.labs.langdetect.LangDetectException;
 
-public class APIObject extends JobSource implements Callable{
+public class APIObject extends JobSource implements Callable<ArrayList<jobPost>>{
 
 	private String nameAPI;
+	private String thumbnail;
 	
 	// XML piece we need
 	private Element xml_item;
@@ -55,13 +56,12 @@ public class APIObject extends JobSource implements Callable{
 	
 	public APIObject (Document xml, String name, String CompleteSearch){
 				
-		super();
 		xml_item = xml.getElementById(name);
 		this.completeSearch = CompleteSearch;
 	}
 	
 	@Override
-	public Object call() throws Exception {
+	public ArrayList<jobPost> call() throws Exception {
 		// TODO Auto-generated method stub
 		setAPIDataRequest();
 		
@@ -80,6 +80,7 @@ public class APIObject extends JobSource implements Callable{
         Element api = xml_item.getElementsByTag("api").first();
         
         this.nameAPI = xml_item.select("name").first().text();
+        this.thumbnail = xml_item.select("thumbnail").first().text();
 		
 		this.root_url = api.select("root_url").first().text();
  	   	this.publisher_id = api.select("publisher_id").first().text();
@@ -186,6 +187,7 @@ public class APIObject extends JobSource implements Callable{
 		        job.setDescription(description);
 		        job.setLink(link);
 		        job.setSource(nameAPI);
+		        job.setThumbnail(thumbnail);
 		        
 		        jobs.add(job);	      
 	        }

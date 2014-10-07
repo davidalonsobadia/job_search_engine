@@ -16,8 +16,8 @@ html,body{
 	height: 100%;
 }
 
-.up-center-page{
-	background-image: url("office_background_blur.jpg");
+.center-down-page{
+	background-image: url("images/office_background_blur.jpg");
 	background-size: 100% 100%;
     background-repeat: no-repeat;
 	position: relative;
@@ -28,7 +28,7 @@ html,body{
 	height: 80%;
 }
 
-.down-page{
+.up-page{
 	background-color: #23304A;
 	width: 100%;
 
@@ -194,7 +194,7 @@ html,body{
 	height: 44px;
 	line-height: 22.8833px;
 	margin-bottom: 0px;
-	margin-left: 0px;
+	margin-left: -3px;
 	margin-right: 0px;
 	margin-top: 0px;
 	padding-bottom: 9px;
@@ -213,3 +213,19 @@ html,body{
 	-moz-user-select: none;
 }
 
+.about-central-message{
+	
+	background-color: #F7F7F7;
+	width: 100%;
+	height: 100%;
+	padding-top: 5%;
+
+	text-decoration: none;
+	text-align: center;
+	
+	
+
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #565A5C;
+	
+}
