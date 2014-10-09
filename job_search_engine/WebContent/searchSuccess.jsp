@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<link rel="stylesheet" href="style_search_success.css" />
+		<link rel="stylesheet" href="css/style_search_success.css" />
 		<title>Result of your search</title>
 
 		<!-- Javascript -->

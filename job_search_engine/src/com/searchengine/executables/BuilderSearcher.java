@@ -25,6 +25,7 @@ public class BuilderSearcher {
 	private StringSearch search;
 	private Document xml_config;
 	private String config_url = "com/searchengine/resources/webpages_config.xml";
+	private String language_url = "com/searchengine/languageprofiles/";
 	
 	private ArrayList<jobPost> jobPosts;
 	
@@ -38,7 +39,7 @@ public class BuilderSearcher {
 		
 		try {
 			
-			URL url = JobSource.class.getClassLoader().getResource("com/searchengine/languageprofiles/");			
+			URL url = JobSource.class.getClassLoader().getResource(language_url);			
 			DetectorFactory.loadProfile(url.getPath());
 		} catch (LangDetectException e) {
 			// TODO Auto-generated catch block
@@ -109,11 +110,4 @@ public class BuilderSearcher {
 		
 	}
 
-
-	public ArrayList<jobPost> LinkedinJobs() throws Exception{
-
-		ArrayList<jobPost> jobPosts = new ArrayList<>();
-		
-		return jobPosts;
-	}
 }

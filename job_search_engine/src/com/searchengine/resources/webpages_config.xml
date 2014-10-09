@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web_pages>
+<web_pages 
+xmlns="http://www.w3schools.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.w3schools.com webpages_config_schema.xsd">
+
     <web id="BerlinStartupJobs" type="web_page">
         <name>Berlin Startup Jobs</name>
         <logo>http://22iiaa2jpzc63c93rf3p9oti14j8.wpengine.netdna-cdn.com/wp-content/uploads/2011/07/berlin-startup-jobs-logo.png</logo>
@@ -24,7 +28,31 @@
             <post-date-format>MMM d, yyyy</post-date-format>
         </post-tags>
     </web>
-    
+          
+     <web id="BerlinJob" type="web_page">
+     	<name>Berlin Job</name>
+     	<logo>http://www.financiereguizot.com/wp-content/themes/twentyeleven/images/img-not-found_600_600.jpg</logo>
+     	<thumbnail>images/img_not_found_150.jpg</thumbnail>
+
+        <urls>
+            <url_main>http://berlinjob.net/</url_main>
+            <url>http://berlinjob.net/startup-jobs-berlin/index.php</url>
+            <url>http://berlinjob.net/design-jobs-berlin/index.php</url>
+            <url>http://berlinjob.net/marketing-jobs-berlin/index.php</url>
+            <url>http://berlinjob.net/berlin-internet-jobs/index.php</url>           
+        </urls>
+		     	
+     	<post-tags>
+     		<post-container>div.feed</post-container>
+     		<post-title>li</post-title>
+            <post-date>not user</post-date>
+            <post-description>not_used</post-description>
+            <post-link>a</post-link>
+            <post-company>h2</post-company>
+            <post-date-format>not_used</post-date-format>
+     	</post-tags>
+     </web>
+     
      <api id="Indeed" type="api">
      	<name>Indeed Jobs</name>
      	<logo>http://www.indeed.com/images/job_search_indeed.png</logo>
@@ -35,6 +63,7 @@
 		<api>
 			<root_url>http://api.indeed.com/ads/apisearch?</root_url>
 			<help_url>https://ads.indeed.com/jobroll/xmlfeed</help_url>
+			<!-- API Key: remove from here on next version -->
 			<publisher_id>publisher=3569612107709755</publisher_id>
 			<query>q=</query>
 			<location>l=berlin</location>
@@ -55,30 +84,6 @@
      	</post-tags>
      	
      </api>
-       
-     <web id="BerlinJob" type="web_page">
-     	<name>Berlin Job</name>
-     	<logo>http://www.financiereguizot.com/wp-content/themes/twentyeleven/images/img-not-found_600_600.jpg</logo>
-     	<thumbnail>images/img_not_found_150.jpg</thumbnail>
-
-        <urls>
-            <url_main>http://berlinjob.net/</url_main>
-            <url>http://berlinjob.net/startup-jobs-berlin/index.php</url>
-            <url>http://berlinjob.net/design-jobs-berlin/index.php</url>
-            <url>http://berlinjob.net/marketing-jobs-berlin/index.php</url>
-            <url>http://berlinjob.net/berlin-internet-jobs/index.php</url>           
-        </urls>
-		     	
-     	<post-tags>
-     		<post-container>div.feed</post-container>
-     		<post-title>li</post-title>
-     		<post-company>h2</post-company>
-            <post-date>not user</post-date>
-            <post-description>not_used</post-description>
-            <post-link>a</post-link>
-            <post-date-format>not_used</post-date-format>
-     	</post-tags>
-     </web>
      
      <api id="CareerBuilder" type="api">
      	<name>Career Builder</name>
@@ -91,6 +96,7 @@
 		<api>
 			<root_url>http://api.careerbuilder.de/v1/jobsearch?</root_url>
 			<help_url>http://api.careerbuilder.com/Search/jobsearch/jobsearchinfo.aspx</help_url>
+			<!-- API Key: remove from here on next version -->
 			<publisher_id>DeveloperKey=WDHS7RX6NYTBWJLKG8JG</publisher_id>
 			<query>Keywords=</query>
 			<location>Location=Berlin</location>

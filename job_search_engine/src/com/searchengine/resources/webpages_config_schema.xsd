@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.w3schools.com"
+xmlns="http://www.w3schools.com"
+elementFormDefault="qualified">
+
+  <xs:element name="web_pages">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element name="web">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element type="xs:anyURI" name="logo"/>
+              <xs:element type="xs:string" name="thumbnail"/>
+              <xs:element name="urls">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:anyURI" name="url_main"/>
+                    <xs:element type="xs:anyURI" name="url" maxOccurs="unbounded" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="post-tags">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="post-container"/>
+                    <xs:element type="xs:string" name="post-title"/>
+                    <xs:element type="xs:string" name="post-date"/>
+                    <xs:element type="xs:string" name="post-description"/>
+                    <xs:element type="xs:string" name="post-link"/>
+                    <xs:element type="xs:string" name="post-company"/>
+                    <xs:element type="xs:string" name="post-date-format"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id"/>
+            <xs:attribute type="xs:string" name="type"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="api">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element type="xs:anyURI" name="logo"/>
+              <xs:element type="xs:string" name="thumbnail"/>
+              <xs:element name="urls">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:anyURI" name="url_main"/>
+                    <xs:element type="xs:anyURI" name="url" maxOccurs="unbounded" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="api" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:anyURI" name="root_url"/>
+                    <xs:element type="xs:string" name="help_url"/>
+                    <xs:element type="xs:string" name="publisher_id">
+                      <xs:annotation>
+                        <xs:documentation>API Key: remove from here on next version</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element type="xs:string" name="query"/>
+                    <xs:element type="xs:string" name="location"/>
+                    <xs:element type="xs:string" name="country"/>
+                    <xs:element type="xs:string" name="user_agent"/>
+                    <xs:element type="xs:string" name="limit"/>
+                    <xs:element type="xs:string" name="api_version"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="post-tags">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="post-container"/>
+                    <xs:element type="xs:string" name="post-title"/>
+                    <xs:element type="xs:string" name="post-company"/>
+                    <xs:element type="xs:string" name="post-date"/>
+                    <xs:element type="xs:string" name="post-description"/>
+                    <xs:element type="xs:string" name="post-link"/>
+                    <xs:element type="xs:string" name="post-date-format"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="type" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
