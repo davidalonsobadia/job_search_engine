@@ -74,9 +74,7 @@ public class BuilderSearcher {
 		}
 		
 		List<Future<ArrayList<jobPost>>> futureList = executorService.invokeAll(lst);
-		
-		System.out.println(futureList);
-		 
+				 
         for(Future<ArrayList<jobPost>> future : futureList)
         {
         	for(jobPost final_job : future.get()){

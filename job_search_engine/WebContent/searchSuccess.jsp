@@ -9,8 +9,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<link rel="stylesheet" href="css/style_search_success.css" />
 		<title>Result of your search</title>
-
-		<!-- Javascript -->
 	</head>
 <body>
 	<div class=container>
@@ -97,8 +95,7 @@
 				<ul>
 			    <c:if test="${currentPage != 1 && maxPageRange >= 1}">
 			        <li class="extrem"><a href="InitSearch?page=${currentPage - 1}">&#10094;&#10094;Previous</a></li>
-			    </c:if>
-			 
+			    </c:if>		 
 			    <%--For displaying Page numbers. 
 			    The when condition does not display a link for the current page--%>
 	            <c:forEach begin="${minPageRange}" end="${maxPageRange}" var="i">
@@ -107,7 +104,7 @@
 	                        <li>${i}</li>
 	                    </c:when>
 	                    <c:otherwise>
-	                        <li><a href="InitSearch?page=${i}">${i}</a></li>
+	                        <a href="InitSearch?page=${i}"><li>${i}</li></a>
 	                    </c:otherwise>
 	                </c:choose>
 	            </c:forEach>
