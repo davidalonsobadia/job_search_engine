@@ -38,14 +38,7 @@
 					<ul>
 						<c:forEach items="${JobsList}" var="job" varStatus="loopCounter" >
 							<a href=<c:out value="${job.link}"/> >
-							<c:choose>
-								<c:when test="${loopCounter.isFirst()}">
-								    <li onmouseover="change_border()" onmouseout="normal_border()">
-								</c:when>
-								<c:otherwise>							
-									<li>
-								</c:otherwise>								
-							</c:choose>
+								<li>
 									<table>
 									<tr>
 										<td>

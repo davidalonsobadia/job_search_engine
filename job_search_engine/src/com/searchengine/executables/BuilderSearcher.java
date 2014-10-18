@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadFactory;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -42,7 +43,6 @@ public class BuilderSearcher {
 			URL url = JobSource.class.getClassLoader().getResource(language_url);			
 			DetectorFactory.loadProfile(url.getPath());
 		} catch (LangDetectException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Exception loading profiles for Language detection library");
 			e.printStackTrace();
 		}
@@ -56,8 +56,8 @@ public class BuilderSearcher {
 		
 		this.xml_config = getXMLDocumentFromInternalFile(config_url);
 		
-				
-		ExecutorService executorService = Executors.newFixedThreadPool(searchNames.length);
+		ThreadFactory googleThreadFactory = com.google.appengine.api.ThreadManager.currentRequestThreadFactory();
+		ExecutorService executorService = Executors.newCachedThreadPool(googleThreadFactory);
 		
 		List<Callable<ArrayList<jobPost>>> lst = new ArrayList<Callable<ArrayList<jobPost>>>();
 		

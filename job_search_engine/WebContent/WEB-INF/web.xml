@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<web-app 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xmlns="http://java.sun.com/xml/ns/javaee" 
-xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+xmlns:web="http://java.sun.com/xml/ns/javaee" 
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
 id="WebApp_ID" 
 version="2.5">
@@ -9,12 +10,12 @@ version="2.5">
   <welcome-file-list>
     <welcome-file>mainPage.html</welcome-file>
   </welcome-file-list>
-	<servlet> 
-		<servlet-name>SearchServlet</servlet-name> 
-		<servlet-class>com.searchengine.executables.InitSearch</servlet-class> 
-	</servlet> 
-	<servlet-mapping> 
-		<servlet-name>SearchServlet</servlet-name> 
-		<url-pattern>/InitSearch</url-pattern> 
-	</servlet-mapping> 
+  <servlet>
+    <servlet-name>SearchServlet</servlet-name>
+    <servlet-class>com.searchengine.executables.InitSearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/InitSearch</url-pattern>
+  </servlet-mapping>
 </web-app>
