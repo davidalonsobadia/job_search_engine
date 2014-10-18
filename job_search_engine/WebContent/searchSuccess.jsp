@@ -11,20 +11,6 @@
 		<title>Result of your search</title>
 
 		<!-- Javascript -->
-		<script>
-		function change_border() {
-    		var x = document.getElementsByClassName('wrapper-title-line');
-    		x[0].style.borderBottomStyle = "solid";
-    		x[0].style.borderBottomColor = "transparent";
-    		x[0].style.borderBottomWidth = "1px";
-		} 
-		function normal_border(){
-			var x = document.getElementsByClassName('wrapper-title-line');
-    		x[0].style.borderBottomColor = "#565A5C";
-    		x[0].style.borderBottomStyle = "solid";
-    		x[0].style.borderBottomWidth = "1px";
-		} 
-		</script>
 	</head>
 <body>
 	<div class=container>
