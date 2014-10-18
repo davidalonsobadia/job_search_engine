@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
  * 
  */
 
-@WebServlet("/InitSearch")
 public class InitSearch extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -76,7 +74,6 @@ public class InitSearch extends HttpServlet {
 				try {
 					jobs.addAll(builderSearch.setSearches());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					System.out.println("ERROR: Unexpected exit from Servlet ( Controller)");
 					System.out.println(e);
 				}

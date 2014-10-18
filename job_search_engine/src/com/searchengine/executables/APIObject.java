@@ -69,9 +69,14 @@ public class APIObject extends JobSource implements Callable<ArrayList<jobPost>>
 		
 		getAPIResponse();
 	
-		getAPIDataResponse();
-			
-		return setAPIResponse();
+		if (APIResponse == null){
+			return new ArrayList<jobPost>();
+		} else{
+		
+			getAPIDataResponse();
+				
+			return setAPIResponse();
+		}
 		
 	}
 	
