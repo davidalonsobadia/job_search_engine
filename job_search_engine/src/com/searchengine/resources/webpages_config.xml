@@ -102,8 +102,8 @@ xsi:schemaLocation="http://www.w3schools.com webpages_config_schema.xsd">
 			<location>Location=Berlin</location>
 			<country>co=de</country>
 			<user_agent>useragent=Mozilla//4.0(Firefox)</user_agent>
-			<limit>not used</limit>
-			<api_version>not used</api_version>		
+			<limit></limit>
+			<api_version></api_version>		
 			
 		</api>
 		     	

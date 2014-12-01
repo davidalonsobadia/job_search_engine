@@ -94,7 +94,7 @@
 	            <c:forEach begin="${minPageRange}" end="${maxPageRange}" var="i">
 	                <c:choose>
 	                    <c:when test="${currentPage eq i}">
-	                        <li>${i}</li>
+	                        <li class="current">${i}</li>
 	                    </c:when>
 	                    <c:otherwise>
 	                        <a href="InitSearch?page=${i}"><li>${i}</li></a>

@@ -344,3 +344,8 @@ html,body{
 .paginator li.extrem {
 	border: none;
 }
+
+.paginator li.current {
+	color: #565A5C;
+	text-decoration: underline;
+}

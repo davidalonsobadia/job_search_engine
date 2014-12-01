@@ -1,5 +1,8 @@
 package com.searchengine.executables;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,6 +85,7 @@ public class webCrawlerObject extends JobSource implements Callable<ArrayList<jo
 		try{
 		   //GET RESPONSE
 			System.out.println("Going to crawl next URL: " + web_url.text());
+			
 			doc = Jsoup.connect(web_url.text()).userAgent("Mozilla").get();
 
 		} catch (Exception e) {

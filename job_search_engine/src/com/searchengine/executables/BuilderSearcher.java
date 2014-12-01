@@ -35,7 +35,11 @@ public class BuilderSearcher {
 			 "BerlinJob",
 			 "Indeed",
 			 "CareerBuilder"};
-	
+	/*
+	private String searchNames[] =
+		{"Indeed",
+			 "CareerBuilder"};
+	*/
 	public BuilderSearcher(StringSearch search){
 		
 		try {
@@ -67,7 +71,8 @@ public class BuilderSearcher {
 			
 			if (xml_item.equalsIgnoreCase("api")) {
 				lst.add( new APIObject(xml_config, searchNames[i], search.getCompleteSearch()));
-			} else if (xml_item.equalsIgnoreCase("web_page")){
+			} 
+			else if (xml_item.equalsIgnoreCase("web_page")){
 				lst.add( new webCrawlerObject(xml_config, searchNames[i], search.getArrayWords() ));
 			}
 
@@ -81,6 +86,8 @@ public class BuilderSearcher {
         		jobPosts.add(final_job);
         	}
         }
+        
+        executorService.shutdown();
         
         System.out.println("TOTAL Number of results: " + jobPosts.size());
         
