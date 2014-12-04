@@ -1,8 +1,5 @@
 package com.searchengine.executables;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
