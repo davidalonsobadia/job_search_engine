@@ -1,4 +1,4 @@
-# job search engine
+# Job search engine
 Personal project, done with Java and using Eclipse as an IDE. No other Frameworks were used. 
 The main goal of that project was to learn some Java basics, as well as Servlet/JSP technologies. Furthermore it uses several Java API technologies
 
